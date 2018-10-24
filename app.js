@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var bcrypt = require('bcrypt-nodejs');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -52,28 +52,43 @@ var db = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 var User = require('./models/user');
-
-mongoose.connect('mongodb://localhost/testProject', function (err) {
+//mongoose.connect('mongodb+srv://userName:Passwrod@cluster.mongodb.net/', {dbName: 'yourDbName'});
+const uri = "mongodb://cedmnds:toast42@cluster0-shard-00-00-atqcd.gcp.mongodb.net:27017,cluster0-shard-00-01-atqcd.gcp.mongodb.net:27017,cluster0-shard-00-02-atqcd.gcp.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true"
+mongoose.connect(uri, {dbName:'testProject'}, function (err) {
   
     if (err) throw err;
   
     console.log('Successfully connected');
 
-    var testUser = new User({
-      _id: new mongoose.Types.ObjectId(),
-      name: 'CJ',
-      username: 'cedmnds',
-      email: 'collin-edmonds@uiowa.edu',
-      password: 'test',
-      created_at: Date.now()
-    });
+    var query = User.findOne({name: 'CJ'});
+    query.exec(function(err, person) {
+      if(err) return handleError(err);
 
-    testUser.save(function(err) {
-      if (err) throw err;
-   
-      console.log('User successfully saved.');
+      if(person==null){
+        var testUser = new User({
+          _id: new mongoose.Types.ObjectId(),
+          name: 'CJ',
+          username: 'cedmnds',
+          email: 'collin-edmonds@uiowa.edu',
+          password: 'test',
+          created_at: Date.now()
+        });
+
+        testUser.save(function(err) {
+          if (err) throw err;
+       
+          console.log('User successfully saved.');
+        });
+      }
+    
+      // var hash = person.password;
+      // bcrypt.compare("test", hash,function(err,res){
+      //   if(res==true){
+      //     console.log('it works');
+      //   }
+      // });
     });
-  
+    
  });
 
 
