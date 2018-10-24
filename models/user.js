@@ -11,6 +11,26 @@ var userSchema = new mongoose.Schema({
     created_at: Date
   });
   
+  userSchema.statics.authenticate = function (email, password, callback) {
+    User.findOne({ email: email })
+      .exec(function (err, user) {
+        if (err) {
+          return callback(err)
+        } else if (!user) {
+          var err = new Error('User not found.');
+          err.status = 401;
+          return callback(err);
+        }
+        bcrypt.compare(password, user.password, function (err, result) {
+          if (result === true) {
+            return callback(null, user);
+          } else {
+            return callback();
+          }
+        })
+      });
+  }
+
   userSchema.pre('save', function(next){
     var user = this;
     if(!user.isModified('password')) return next();

@@ -6,8 +6,16 @@ var logger = require('morgan');
 var bcrypt = require('bcrypt-nodejs');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var session = require('express-session');
 
 var app = express();
+
+//use sessions for tracking logins
+app.use(session({
+  secret: 'work hard',
+  resave: true,
+  saveUninitialized: false
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,6 +45,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 //Import the mongoose module
 var mongoose = require('mongoose');
