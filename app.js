@@ -63,7 +63,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 var User = require('./models/user');
 //mongoose.connect('mongodb+srv://userName:Passwrod@cluster.mongodb.net/', {dbName: 'yourDbName'});
-const uri = "mongodb://cedmnds:toast42@cluster0-shard-00-00-atqcd.gcp.mongodb.net:27017,cluster0-shard-00-01-atqcd.gcp.mongodb.net:27017,cluster0-shard-00-02-atqcd.gcp.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true"
+const uri = "mongodb://team-blue:toast42@cluster0-shard-00-00-atqcd.gcp.mongodb.net:27017,cluster0-shard-00-01-atqcd.gcp.mongodb.net:27017,cluster0-shard-00-02-atqcd.gcp.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true"
 mongoose.connect(uri, {dbName:'testProject'}, function (err) {
   
     if (err) throw err;
