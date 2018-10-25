@@ -7,6 +7,19 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.get('/signup', function(req, res, next) {
+  res.render('signup', { title: 'Express' });
+});
+
+router.get('/design', function(req, res, next){
+  res.render('design');
+});
+
+router.get('/about', function(req, res, next){
+  res.render('about');
+});
+
+
 // GET for logout logout
 router.get('/logout', function (req, res, next) {
   if (req.session) {
@@ -22,10 +35,6 @@ router.get('/logout', function (req, res, next) {
 });
 
 router.post('/profile', function (req, res, next) {
-console.log("RIGHT HERE");
-console.log(req.body.email);
-var userEmail = req.body.email;
-req.session.email = userEmail;
 if (req.body.email && req.body.password) {
     User.authenticate(req.body.email, req.body.password, function (error, user) {
       if (error || !user) {
@@ -43,6 +52,30 @@ if (req.body.email && req.body.password) {
     return next(err);
   }
 });
+
+router.post('/', function (req, res, next) {
+  if (req.body.email &&
+    req.body.username &&
+    req.body.name &&
+    req.body.password) {
+
+    var userData = {
+      name: req.body.name,
+      email: req.body.email,
+      username: req.body.username,
+      password: req.body.password
+    }
+
+    User.create(userData, function (error, user) {
+      if (error) {
+        return next(error);
+      } else {
+        req.session.userId = user._id;
+        return res.redirect('/profile');
+      }
+    });
+  }
+  });
 
 router.get('/profile', function (req, res, next) {
   User.findById(req.session.userId)

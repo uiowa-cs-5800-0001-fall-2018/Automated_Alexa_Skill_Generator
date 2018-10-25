@@ -90,13 +90,6 @@ mongoose.connect(uri, {dbName:'testProject'}, function (err) {
           console.log('User successfully saved.');
         });
       }
-    
-      // var hash = person.password;
-      // bcrypt.compare("test", hash,function(err,res){
-      //   if(res==true){
-      //     console.log('it works');
-      //   }
-      // });
     });
     
  });
