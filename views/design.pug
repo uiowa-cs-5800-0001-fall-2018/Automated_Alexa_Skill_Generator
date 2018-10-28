@@ -1,4 +1,86 @@
 extends layout
 
 block content
-    h1= "Our blocks live here"
+  body
+    script(src="../node_modules/blockly/blockly_compressed.js")
+    script(src="../node_modules/blockly/blocks_compressed.js")
+    script(src="../node_modules/blockly/javascript_compressed.js")
+    script(src="../node_modules/blockly/msg/js/en.js")
+    p
+      button(onclick='showCode()') Show JavaScript
+      button(onclick='runCode()') Run JavaScript
+    #blocklyDiv(style='height: 480px; width: 600px;')
+    xml#toolbox(style='display: none')
+      category(name='Logic')
+        block(type='controls_if')
+        block(type='logic_compare')
+        block(type='logic_operation')
+        block(type='logic_negate')
+        block(type='logic_boolean')
+      category(name='Loops')
+        block(type='controls_repeat_ext')
+          value(name='TIMES')
+            block(type='math_number')
+              field(name='NUM') 10
+        block(type='controls_whileUntil')
+      category(name='Math')
+        block(type='math_number')
+        block(type='math_arithmetic')
+        block(type='math_single')
+      category(name='Text')
+        block(type='text')
+        block(type='text_length')
+        block(type='text_print')
+    xml#startBlocks(style='display: none')
+      block(type='controls_if', inline='false', x='20', y='20')
+        mutation(else='1')
+        value(name='IF0')
+          block(type='logic_compare', inline='true')
+            field(name='OP') EQ
+            value(name='A')
+              block(type='math_arithmetic', inline='true')
+                field(name='OP') MULTIPLY
+                value(name='A')
+                  block(type='math_number')
+                    field(name='NUM') 6
+                value(name='B')
+                  block(type='math_number')
+                    field(name='NUM') 7
+            value(name='B')
+              block(type='math_number')
+                field(name='NUM') 42
+        statement(name='DO0')
+          block(type='text_print', inline='false')
+            value(name='TEXT')
+              block(type='text')
+                field(name='TEXT') Don't panic
+        statement(name='ELSE')
+          block(type='text_print', inline='false')
+            value(name='TEXT')
+              block(type='text')
+                field(name='TEXT') Panic
+    script.
+        var workspace = Blockly.inject('blocklyDiv',
+            {media: '../node_modules/blockly/media/',
+            toolbox: document.getElementById('toolbox')});
+            Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
+            workspace);
+        function showCode() {
+            // Generate JavaScript code and display it.
+            Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+            var code = Blockly.JavaScript.workspaceToCode(workspace);
+            alert(code);
+        }
+        function runCode() {
+            // Generate JavaScript code and run it.
+            window.LoopTrap = 1000;
+            Blockly.JavaScript.INFINITE_LOOP_TRAP =
+            'if (--window.LoopTrap == 0) throw "Infinite loop.";\\n';
+            var code = Blockly.JavaScript.workspaceToCode(workspace);
+            Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+            try {
+                eval(code);
+            } catch (e) {
+                alert(e);
+            }
+        }
