@@ -10,6 +10,8 @@ var session = require('express-session');
 
 var app = express();
 
+app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/css/'))
+
 //use sessions for tracking logins
 app.use(session({
   secret: 'work hard',
