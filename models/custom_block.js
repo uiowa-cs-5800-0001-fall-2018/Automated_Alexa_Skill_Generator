@@ -1,5 +1,26 @@
 var mongoose = require('mongoose');
-
+// Sample custom block
+//{
+//   "type": "intent_block",
+//   "message0": "%1 %2",
+//   "args0": [
+//     {
+//       "type": "input_value",
+//       "name": "sample_utterances",
+//       "check": "Array"
+//     },
+//     {
+//       "type": "input_value",
+//       "name": "slots",
+//       "check": "Array"
+//     }
+//   ],
+//   "previousStatement": null,
+//   "nextStatement": null,
+//   "colour": 225,
+//   "tooltip": "",
+//   "helpUrl": "https://developer.amazon.com/docs/custom-skills/create-intents-utterances-and-slots.html"
+// }
 // create a schema
 var blockSchema = new mongoose.Schema({
     type: String,
