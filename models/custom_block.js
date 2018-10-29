@@ -5,7 +5,7 @@ var blockSchema = new mongoose.Schema({
     type: String,
     messages: [String],
     args: [[Schema.Types.Map]],
-    output: { type: Schema.Types.Mixed, default: null }
+    output: { type: Schema.Types.Mixed, default: null },
     previousStatement: { type: Schema.Types.Mixed, default: null },
     nextStatement: { type: Schema.Types.Mixed, default: null },
     colour: { type: Number, default: 0 },
