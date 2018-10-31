@@ -31,6 +31,8 @@ block content
         block(type='text')
         block(type='text_length')
         block(type='text_print')
+      category(name='Custom Blocks')
+        block(type='intent_block')
     xml#startBlocks(style='display: none')
       block(type='controls_if', inline='false', x='20', y='20')
         mutation(else='1')
@@ -65,6 +67,21 @@ block content
             toolbox: document.getElementById('toolbox')});
             Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
             workspace);
+        Blockly.Blocks['intent_block'] = {
+            init: function () {
+                this.appendValueInput("sample_utterances")
+                    .setCheck("Array")
+                    .appendField("sample_utterances");
+                this.appendValueInput("slots")
+                    .setCheck("Array")
+                    .appendField("slots");
+                this.setPreviousStatement(true, null);
+                this.setNextStatement(true, null);
+                this.setColour(225);
+                this.setTooltip("");
+                this.setHelpUrl("https://developer.amazon.com/docs/custom-skills/create-intents-utterances-and-slots.html");
+            }
+        };
         function showCode() {
             // Generate Pyton code and display it.
             Blockly.Python.INFINITE_LOOP_TRAP = null;
