@@ -4,7 +4,7 @@ var User = require('../models/user');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express', hello: req.session.signed_in });
 });
 
 router.get('/signup', function(req, res, next) {
@@ -43,6 +43,7 @@ if (req.body.email && req.body.password) {
         return next(err);
       } else {
         req.session.userId = user._id;
+        req.session.signed_in = true;
         return res.redirect('/profile');
       }
     });
