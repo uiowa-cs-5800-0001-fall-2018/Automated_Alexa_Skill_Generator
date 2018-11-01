@@ -4,7 +4,7 @@ var User = require('../models/user');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', hello: req.session.signed_in });
+  res.render('index', { title: 'Express', signed_in: req.session.signed_in , username: req.session._id});
 });
 
 router.get('/signup', function(req, res, next) {
