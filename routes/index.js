@@ -1,22 +1,23 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var title = 'Alexa Automated'
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', signed_in: req.session.signed_in , username: req.session.email});
+  res.render('index', { title: title, signed_in: req.session.signed_in , username: req.session.email});
 });
 
 router.get('/signup', function(req, res, next) {
-  res.render('signup', { title: 'Express' });
+  res.render('signup', { title: title, signed_in: req.session.signed_in , username: req.session.email});
 });
 
 router.get('/design', function(req, res, next){
-  res.render('design');
+  res.render('design', { title: title, signed_in: req.session.signed_in , username: req.session.email});
 });
 
 router.get('/about', function(req, res, next){
-  res.render('about');
+  res.render('about', { title: title, signed_in: req.session.signed_in , username: req.session.email});
 });
 
 
