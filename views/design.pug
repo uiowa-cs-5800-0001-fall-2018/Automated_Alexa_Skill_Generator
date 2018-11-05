@@ -83,8 +83,14 @@ block content
             }
         };
         function showCode() {
-            // Generate Pyton code and display it.
+            // Generate Python code and display it.
             Blockly.Python.INFINITE_LOOP_TRAP = null;
+            Blockly.Python['intent_block'] = function (block) {
+                var value_sample_utterances = Blockly.Python.valueToCode(block, 'sample_utterances', Blockly.Python.ORDER_ATOMIC);
+                var value_slots = Blockly.Python.valueToCode(block, 'slots', Blockly.Python.ORDER_ATOMIC);
+                alert(value_sample_utterances);
+                return code;
+            };
             var code = Blockly.Python.workspaceToCode(workspace);
             alert(code);
         }
