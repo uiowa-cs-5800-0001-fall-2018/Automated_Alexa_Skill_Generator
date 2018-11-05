@@ -33,7 +33,9 @@ block content
         block(type='text_print')
       category(name='Lists')
         block(type='lists_create_with')
-      category(name='Custom Blocks')
+      category(name='Alexa Skill Blocks')
+        block(type='custom_skill_name_block')
+        block(type='language_model_block')
         block(type='intent_block')
     xml#startBlocks(style='display: none')
       block(type='controls_if', inline='false', x='20', y='20')
@@ -69,29 +71,62 @@ block content
             toolbox: document.getElementById('toolbox')});
             Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
             workspace);
-        Blockly.Blocks['intent_block'] = {
+        Blockly.Blocks['custom_skill_name_block'] = {
             init: function () {
-                this.appendValueInput("intent_name")
+                this.appendValueInput("custom_skill_name")
                     .setCheck("String")
-                    .appendField("intent_name");
-                this.appendValueInput("sample_utterances")
+                    .appendField("custom_skill_name");
+                this.setNextStatement(true, null);
+                this.setColour(100);
+                this.setTooltip("");
+                this.setHelpUrl("https://developer.amazon.com/docs/smapi/interaction-model-schema.html");
+            }
+        };
+        Blockly.Python['custom_skill_name_block'] = function (block) {
+            var value_custom_skill_name = Blockly.Python.valueToCode(block, 'custom_skill_name', Blockly.Python.ORDER_ATOMIC);
+            var code = 'custom_skill_name = ' + value_custom_skill_name + '\n';
+            return code;
+        };
+
+        Blockly.Blocks['language_model_block'] = {
+            init: function () {
+                this.appendValueInput("intents")
                     .setCheck("Array")
-                    .appendField("sample_utterances");
-                this.appendValueInput("slots")
-                    .setCheck("Array")
-                    .appendField("slots");
+                    .appendField("intents");
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(true, null);
+                this.setColour(100);
+                this.setTooltip("");
+                this.setHelpUrl("https://developer.amazon.com/docs/smapi/interaction-model-schema.html");
+            }
+        };
+        Blockly.Python['language_model_block'] = function (block) {
+            var value_intents = Blockly.Python.valueToCode(block, 'intents', Blockly.Python.ORDER_ATOMIC);
+            var code = 'intents = ' + value_intents + '\n';
+            return code;
+        };
+        Blockly.Blocks['intent_block'] = {
+            init: function () {
+                this.appendValueInput("name")
+                    .setCheck("String")
+                    .appendField("name");
+                this.appendValueInput("slots")
+                    .setCheck("Array")
+                    .appendField("slots (optional)");
+                this.appendValueInput("samples")
+                    .setCheck("Array")
+                    .appendField("samples");
+                this.setOutput(true, null);
                 this.setColour(225);
                 this.setTooltip("");
                 this.setHelpUrl("https://developer.amazon.com/docs/custom-skills/create-intents-utterances-and-slots.html");
             }
         };
         Blockly.Python['intent_block'] = function (block) {
-            var value_intent_name = Blockly.Python.valueToCode(block, 'intent_name', Blockly.Python.ORDER_ATOMIC);
-            var value_sample_utterances = Blockly.Python.valueToCode(block, 'sample_utterances', Blockly.Python.ORDER_ATOMIC);
+            var value_name = Blockly.Python.valueToCode(block, 'invocation_name', Blockly.Python.ORDER_ATOMIC);
+            var value_samples = Blockly.Python.valueToCode(block, 'samples', Blockly.Python.ORDER_ATOMIC);
             var value_slots = Blockly.Python.valueToCode(block, 'slots', Blockly.Python.ORDER_ATOMIC);
-            var code = 'intent_name = ' + value_intent_name + '\nsample_utterances = ' + value_sample_utterances + '\nslots = ' + value_slots;
+            var code = '{name: ' + value_name + ', slots: ' + value_slots + ', samples: ' + value_samples + '}';
             return code;
         };
         function showCode() {
