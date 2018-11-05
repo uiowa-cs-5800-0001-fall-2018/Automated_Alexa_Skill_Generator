@@ -31,6 +31,8 @@ block content
         block(type='text')
         block(type='text_length')
         block(type='text_print')
+      category(name='Lists')
+        block(type='lists_create_with')
       category(name='Custom Blocks')
         block(type='intent_block')
     xml#startBlocks(style='display: none')
@@ -69,6 +71,9 @@ block content
             workspace);
         Blockly.Blocks['intent_block'] = {
             init: function () {
+                this.appendValueInput("intent_name")
+                    .setCheck("String")
+                    .appendField("intent_name");
                 this.appendValueInput("sample_utterances")
                     .setCheck("Array")
                     .appendField("sample_utterances");
@@ -82,15 +87,16 @@ block content
                 this.setHelpUrl("https://developer.amazon.com/docs/custom-skills/create-intents-utterances-and-slots.html");
             }
         };
+        Blockly.Python['intent_block'] = function (block) {
+            var value_intent_name = Blockly.Python.valueToCode(block, 'intent_name', Blockly.Python.ORDER_ATOMIC);
+            var value_sample_utterances = Blockly.Python.valueToCode(block, 'sample_utterances', Blockly.Python.ORDER_ATOMIC);
+            var value_slots = Blockly.Python.valueToCode(block, 'slots', Blockly.Python.ORDER_ATOMIC);
+            var code = 'intent_name = ' + value_intent_name + '\nsample_utterances = ' + value_sample_utterances + '\nslots = ' + value_slots;
+            return code;
+        };
         function showCode() {
             // Generate Python code and display it.
             Blockly.Python.INFINITE_LOOP_TRAP = null;
-            Blockly.Python['intent_block'] = function (block) {
-                var value_sample_utterances = Blockly.Python.valueToCode(block, 'sample_utterances', Blockly.Python.ORDER_ATOMIC);
-                var value_slots = Blockly.Python.valueToCode(block, 'slots', Blockly.Python.ORDER_ATOMIC);
-                alert(value_sample_utterances);
-                return code;
-            };
             var code = Blockly.Python.workspaceToCode(workspace);
             alert(code);
         }

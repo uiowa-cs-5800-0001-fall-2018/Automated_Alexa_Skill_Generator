@@ -103,7 +103,7 @@ mongoose.connect(uri, {dbName:'testProject'}, function (err) {
             var testBlock = new CustomBlock({
                 _id: new mongoose.Types.ObjectId(),
                 type: 'intent_block',
-                messages: ['%1 %2'],
+                messages: ['sample_utterances %1 slots %2'],
                 args: [[ { type: 'input_value', name: 'sample_utterances', check: 'Array' }, { type: 'input_value', name: 'slots', check: 'Array' }]],
                 colour: 225,
                 helpUrl: 'https://developer.amazon.com/docs/custom-skills/create-intents-utterances-and-slots.html'
