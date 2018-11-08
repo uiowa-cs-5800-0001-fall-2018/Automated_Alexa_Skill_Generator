@@ -4,3 +4,13 @@ block content
   head
     h1 #{title}
   body(class= 'text-center')
+  
+  left
+    ul
+      if signed_in
+        li <a href="/">My Skills</a> 
+
+      li <a href="/">Public Skills</a>
+      li <a href="/">Sample Skills</a>
+
+  
