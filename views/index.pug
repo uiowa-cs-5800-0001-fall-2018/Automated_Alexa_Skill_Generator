@@ -12,5 +12,11 @@ block content
 
       li <a href="/">Public Skills</a>
       li <a href="/">Sample Skills</a>
-
+      // below here should iterate through skills table and display what is desired
+      //for now it will display some random stuff for concept
+    ul  
+      -  var filler = ['button','button','button','button','button','button','button','button','button','button','button','button']
+      each val, index in filler
+        ul
+          p  #{val} #{index}
   
