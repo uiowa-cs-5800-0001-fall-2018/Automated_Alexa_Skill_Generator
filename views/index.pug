@@ -6,17 +6,42 @@ block content
   body(class= 'text-center')
   
   left
-    ul
+    tr
       if signed_in
-        li <a href="/">My Skills</a> 
+        td <a href="/">My Skills</a> 
 
-      li <a href="/">Public Skills</a>
-      li <a href="/">Sample Skills</a>
+      td <a href="/">Public Skills</a>
+      td <a href="/">Sample Skills</a>
       // below here should iterate through skills table and display what is desired
       //for now it will display some random stuff for concept
-    ul  
-      -  var filler = ['button','button','button','button','button','button','button','button','button','button','button','button']
+    tr  
+      -  var filler = ['button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button']
       each val, index in filler
-        ul
-          p  #{val} #{index}
-  
+        tr
+          p  Skill Link #{index}
+  if signed_in
+    right
+      h2 My Profile
+        p Username: #{username}
+        p Skills Created: 999
+        p More Profile Data Coming Soon
+  else
+    right
+      .main.container
+        .row
+          .col-md-6.col-md-offset-3
+            h1.display-4.m-b-2 Sign Up
+            form(method='POST' action='/')
+              div.form-group
+                label(for='name') Name
+                input.form-control(type='text' id='name' placeholder='name' name='name')
+              div.form-group
+                label(for='username') Username
+                input.form-control(type='text' id='username' placeholder='username' name='username')
+              div.form-group
+                label(for='email') Email
+                input.form-control(type='text' id='email' placeholder='email' name='email')
+              div.form-group
+                label(for='password') Password
+                input.form-control(type='password' id='password' placeholder='password' name='password')
+              button.btn.btn-primary(type='submit') Sign Up
