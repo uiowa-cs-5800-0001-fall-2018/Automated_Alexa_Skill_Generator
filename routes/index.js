@@ -96,7 +96,18 @@ router.post('/', function (req, res, next) {
         return next(error);
       } else {
         req.session.userId = user._id;
-        return res.redirect('back');
+        User.authenticate(req.body.email, req.body.password, function (error, user) {
+          if (error || !user) {
+            var err = new Error('Wrong email or password.');
+            err.status = 401;
+            return next(err);
+          } else {
+            req.session.userId = user._id;
+            req.session.email = user.email
+            req.session.signed_in = true;
+            return res.redirect('back');
+          }
+        });
       }
     });
   }
