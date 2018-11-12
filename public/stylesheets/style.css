@@ -1,5 +1,4 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -73,4 +72,9 @@ left {
 
 right {
   float: right;
+}
+
+righthead {
+  float: right;
+  width: 100vh;
 }
