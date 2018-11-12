@@ -18,7 +18,7 @@ ul {
 tr {
   list-style-type: none;
   margin: 0;
-  padding: 0;
+  padding: 20px 20px;
   overflow: hidden;
 }
 
@@ -34,7 +34,7 @@ td a {
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  padding: 20px 20px;
   text-decoration: none;
 }
 
@@ -44,6 +44,15 @@ li a {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+}
+
+li b {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: bold;
+  font-size: 18px;
 }
 
 /* Change the link color to #111 (black) on hover */
