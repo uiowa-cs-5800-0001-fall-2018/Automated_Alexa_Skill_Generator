@@ -48,6 +48,11 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+// Set the port 
+var server = app.listen(8080, function() {
+  console.log('Ready on port %d', server.address().port);
+});
+
 
 
 //Import the mongoose module

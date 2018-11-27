@@ -12,12 +12,16 @@ router.get('/signup', function(req, res, next) {
   res.render('signup', { title: title, signed_in: req.session.signed_in , username: req.session.email});
 });
 
-router.get('/design', function(req, res, next){
-  res.render('design', { title: title, signed_in: req.session.signed_in , username: req.session.email});
+router.get('/profile', function(req, res, next) {
+  res.render('profile', { title: title, signed_in: req.session.signed_in , username: req.session.email});
 });
 
-router.get('/about', function(req, res, next){
-  res.render('about', { title: title, signed_in: req.session.signed_in , username: req.session.email});
+router.get('/signin', function(req, res, next) {
+  res.render('signin', { title: title, signed_in: req.session.signed_in , username: req.session.email});
+});
+
+router.get('/design', function(req, res, next){
+  res.render('design', { title: title, signed_in: req.session.signed_in , username: req.session.email});
 });
 
 

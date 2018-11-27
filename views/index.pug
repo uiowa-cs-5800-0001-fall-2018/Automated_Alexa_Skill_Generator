@@ -1,46 +1,94 @@
-extends layout
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-block content
-  head
-  body(class= 'text-center')
-  
-  left
-    tr
-      if signed_in
-        td <a href="/">My Skills</a> 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-      td <a href="/">Public Skills</a>
-      td <a href="/">Sample Skills</a>
-      // below here should iterate through skills table and display what is desired
-      //for now it will display some random stuff for concept
-    tr  
-      -  var filler = ['button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button','button']
-      each val, index in filler
-        tr
-          p  Skill Link #{index}
-  if signed_in
-    right
-      h2 My Profile
-        p Username: #{username}
-        p Skills Created: 999
-        p More Profile Data Coming Soon
-  else
-    right
-    .main.container
-      .row
-        .col-md-6.col-md-offset-3
-          h1.display-4.m-b-2 Sign Up
-          form(method='POST' action='/')
-            div.form-group
-              label(for='name') Name
-              input.form-control(type='text' id='name' placeholder='name' name='name')
-            div.form-group
-              label(for='username') Username
-              input.form-control(type='text' id='username' placeholder='username' name='username')
-            div.form-group
-              label(for='email') Email
-              input.form-control(type='text' id='email' placeholder='email' name='email')
-            div.form-group
-              label(for='password') Password
-              input.form-control(type='password' id='password' placeholder='password' name='password')
-            button.btn.btn-primary(type='submit') Sign Up
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+  </head>
+  <body data-spy="scroll" data-target=".navbar" data-offset="0">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top row">  
+    <ul class="navbar-nav col-9">
+        <li class="nav-item">
+        <a class="nav-link ml-2 mr-2" href="#section1">Home</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link ml-2 mr-2" href="#section2">About</a>
+        </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle mr-2 ml-2" href="#" id="navbardrop" data-toggle="dropdown">Account</a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="#section41">Profile</a>
+            <a class="dropdown-item" href="#section42">Dashboard</a>
+            <a class="dropdown-item" href="#section43">Sign Out</a>
+        </div>
+        </li>
+        <button type="button" class="btn btn-primary">Sign Up</button>
+    </ul>
+    <div class="d-flex flex-row-reverse bd-highlight col-3">
+        <button type="button" class="btn btn-danger"> New Skill <i class="fas fa-plus-square" style="margin-left: 8px"></i></button>
+    </div>
+    </nav>
+
+    <div id="section1" class="container-fluid bg-light" style="width: 100%">
+        <div class="row">
+            <div class="w-100 h-100">
+                <img class="img-responsive rounded" src="https://cdn-images-1.medium.com/max/1600/1*4W4hAUEobx1e5ZQTc21wEQ.png">
+            </div>
+        </div>
+
+    </div>
+    <div id="section2" class="container-fluid bg-light w-100 text-center" style="padding-top:50px;padding-bottom:50px">
+    <h1 style="margin-bottom: 20px">Why us?</h1>
+    <p>We empower creaters to develop an Alexa Skill <u>WITHOUT</u> the need to write code!</p>
+    <p>We created graphical building blocks for you to make building a skill as simple as possible. </p>
+    </div>
+    <div id="section3" class="container-fluid bg-secondary w-100 text-center" style="padding-top:50px;padding-bottom:50px">
+        <h1 style="margin-bottom: 20px">Step by Step Guide</h1>
+        <div class="card-deck">
+            <div class="card bg-warning">
+                <div class="card-body text-center">
+                <h2 class="mb-2"> <i class="fas fa-smile-wink mb-2" style="margin-right: 8px"></i>Sign Up</h2>
+                <p class="card-text"> Sign up for free-dollars!</p>
+                </div>
+            </div>
+            <div class="card bg-warning">
+                <div class="card-body text-center mb-2">
+                <h2 class="mb-2"> <i class="fas fa-plus-square" style="margin-right: 8px"></i> Create a skill</h2>
+                <p class="card-text">Click <b><u>New Skill</u></b> to begin a new project.</p>
+                </div>
+            </div>
+            <div class="card bg-warning">
+                <div class="card-body text-center mb-2">
+                <h2 class="mb-2"> <i class="fas fa-save" style="margin-right: 8px"></i> Save your work</h2>
+                <p class="card-text">Be sure to regularly <b><u>Save</u></b> so you dont lose progress!</p>
+                </div>
+            </div>
+            <div class="card bg-warning">
+                <div class="card-body text-center mb-2">
+                <h2 class="mb-2"> <i class="fas fa-check" style="margin-right: 8px"></i>Success</h2>
+                <p class="card-text">When you are finished, click <b><u>Generate</u></b> and we'll turn the dream into a reality!</p>
+                </div>
+            </div> 
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="page-footer font-small bg-dark text-light">
+        <div class="footer-copyright text-center py-3">© 2018 Copyright:
+          <a> AlexaSkillGenerator.com</a>
+        </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
