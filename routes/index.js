@@ -51,7 +51,8 @@ router.post('/authenticate', function (req, res, next) {
           req.session.userId = user._id;
           req.session.email = user.email
           req.session.signed_in = true;
-          return res.redirect('back');
+          //return res.redirect('back');
+          return res.redirect('/profile');
         }
       });
     } else {
@@ -72,6 +73,7 @@ if (req.body.email && req.body.password) {
         req.session.userId = user._id;
         req.session.email = user.email
         req.session.signed_in = true;
+        //return res.redirect('back');
         return res.redirect('/profile');
       }
     });
