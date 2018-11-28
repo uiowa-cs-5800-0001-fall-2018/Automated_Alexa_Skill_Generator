@@ -17,12 +17,12 @@ block content
           .card-body
             h5.card-title.text-center
               b Sign In
-            form.form-signin(method='POST' action='/authenticate')
+            form.form-signin(method='POST' action='/profile')
               .form-label-group
-                input.form-control(type='text', id='email', placeholder='Email address')
+                input.form-control(type='text', id='email', placeholder='Email address', name='email')
                 label(for='email') Email address
               .form-label-group
-                input.form-control(type='password', id='password', placeholder='Password')
+                input.form-control(type='password', id='password', placeholder='Password', name='password')
                 label(for='password') Password
               button.btn.btn-lg.btn-primary.btn-block.text-uppercase(type='submit') Sign In
             a.d-block.text-center.mt-2.medium(href='/signup') New User? Register Here!

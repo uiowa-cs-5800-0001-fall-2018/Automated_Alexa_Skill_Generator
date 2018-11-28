@@ -109,7 +109,7 @@ router.post('/', function (req, res, next) {
             req.session.userId = user._id;
             req.session.email = user.email
             req.session.signed_in = true;
-            return res.redirect('back');
+            return res.redirect('/profile');
           }
         });
       }

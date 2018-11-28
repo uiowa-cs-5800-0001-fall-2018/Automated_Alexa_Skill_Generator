@@ -19,16 +19,16 @@ block content
               b Register
             form.form-signin(method='POST' action='/')
               .form-label-group
-                input.form-control(type='text', id='name', placeholder='Name', required)
+                input.form-control(type='text', id='name', placeholder='Name', name='name')
                 label(for='name') Name
               .form-label-group
-                input.form-control(type='text', id='username', placeholder='Username', required)
+                input.form-control(type='text', id='username', placeholder='Username', name='username')
                 label(for='username') Username
               .form-label-group
-                input.form-control(type='text', id='email', placeholder='Email address', required)
+                input.form-control(type='text', id='email', placeholder='Email address', name='email')
                 label(for='email') Email address
               .form-label-group
-                input.form-control(type='password', id='password', placeholder='Password', required)
+                input.form-control(type='password', id='password', placeholder='Password', name='password')
                 label(for='password') Password
               button.btn.btn-lg.btn-primary.btn-block.text-uppercase(type='submit') Register
             a.d-block.text-center.mt-2.medium(href='/signin') Already have an account? Sign in here!
