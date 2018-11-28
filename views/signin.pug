@@ -1,49 +1,33 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+extends layout
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="/stylesheets/signin.css">
-
-    <title>Hello, world!</title>
-  </head>
-  <body>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-10 col-xl-9 mx-auto">
-        <div class="card card-signin flex-row my-5">
-          <div class="card-img-left d-none d-md-flex">
-             <!-- Background image for card set in CSS! -->
-          </div>
-          <div class="card-body">
-            <h5 class="card-title text-center"><b>Sign In</b></h5>
-            <form class="form-signin">
-
-              <div class="form-label-group">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
-                <label for="inputEmail">Email address</label>
-              </div>
-
-              <div class="form-label-group">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                <label for="inputPassword">Password</label>
-              </div>
-
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign In</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  </body>
+block content
+  // Required meta tags
+  meta(charset='utf-8')
+  meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  // Bootstrap CSS
+  link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css', integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO', crossorigin='anonymous')
+  link(rel='stylesheet', href='/stylesheets/signin.css')
+  title Sign In
+  .container
+    .row
+      .col-lg-10.col-xl-9.mx-auto
+        .card.card-signin.flex-row.my-5
+          .card-img-left.d-none.d-md-flex
+            // Background image for card set in CSS!
+          .card-body
+            h5.card-title.text-center
+              b Sign In
+            form.form-signin(method='POST' action='/authenticate')
+              .form-label-group
+                input.form-control(type='text', id='email', placeholder='Email address')
+                label(for='email') Email address
+              .form-label-group
+                input.form-control(type='password', id='password', placeholder='Password')
+                label(for='password') Password
+              button.btn.btn-lg.btn-primary.btn-block.text-uppercase(type='submit') Sign In
+            a.d-block.text-center.mt-2.medium(href='/signup') New User? Register Here!
+  // Optional JavaScript
+  // jQuery first, then Popper.js, then Bootstrap JS
+  script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js', integrity='sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49', crossorigin='anonymous')
+  script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js', integrity='sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy', crossorigin='anonymous')

@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
+extends layout
+
+block content
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,40 +11,15 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
-  </head>
-  <body data-spy="scroll" data-target=".navbar" data-offset="0">
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top row">  
-    <ul class="navbar-nav col-9">
-        <li class="nav-item">
-        <a class="nav-link ml-2 mr-2" href="#section1">Home</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link ml-2 mr-2" href="#section2">About</a>
-        </li>
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle mr-2 ml-2" href="#" id="navbardrop" data-toggle="dropdown">Account</a>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="#section41">Profile</a>
-            <a class="dropdown-item" href="#section42">Dashboard</a>
-            <a class="dropdown-item" href="#section43">Sign Out</a>
-        </div>
-        </li>
-        <button type="button" class="btn btn-primary">Sign Up</button>
-    </ul>
-    <div class="d-flex flex-row-reverse bd-highlight col-3">
-        <button type="button" class="btn btn-danger"> New Skill <i class="fas fa-plus-square" style="margin-left: 8px"></i></button>
-    </div>
-    </nav>
-
-    <div id="section1" class="container-fluid bg-light" style="width: 100%">
+    <div id="home" class="container-fluid bg-light" style="width: 100%">
         <div class="row">
             <div class="w-100 h-100">
-                <img class="img-responsive rounded" src="https://cdn-images-1.medium.com/max/1600/1*4W4hAUEobx1e5ZQTc21wEQ.png">
+                <img class="img-responsive rounded" src="https://cdn-images-1.medium.com/max/1600/1*4W4hAUEobx1e5ZQTc21wEQ.png" style="width: 100%">
             </div>
         </div>
-
     </div>
-    <div id="section2" class="container-fluid bg-light w-100 text-center" style="padding-top:50px;padding-bottom:50px">
+    
+    <div id="about" class="container-fluid bg-light w-100 text-center" style="padding-top:50px;padding-bottom:50px">
     <h1 style="margin-bottom: 20px">Why us?</h1>
     <p>We empower creaters to develop an Alexa Skill <u>WITHOUT</u> the need to write code!</p>
     <p>We created graphical building blocks for you to make building a skill as simple as possible. </p>
@@ -90,5 +65,3 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
-</html>
