@@ -31,9 +31,15 @@ html
           a(href='/signup')
             button.btn.btn-primary.ml-2(type='button') Register
       .d-flex.flex-row-reverse.bd-highlight.col-3
-        a(href='/design')
-          button.btn.btn-danger(type='button')
-            | New Skill 
-            i.fas.fa-plus-square(style='margin-left: 8px')
+        if signed_in
+          a(href='/design')
+            button.btn.btn-danger(type='button')
+              | New Skill 
+              i.fas.fa-plus-square(style='margin-left: 8px')
+        else
+          a(href='/design')
+            button.btn.btn-danger(type='button', disabled)
+              | New Skill 
+              i.fas.fa-plus-square(style='margin-left: 8px')
   body.pt-5
     block content
