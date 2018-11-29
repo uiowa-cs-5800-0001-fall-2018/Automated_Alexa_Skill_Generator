@@ -61,9 +61,13 @@ block content
                     value(name='samples')
                       block(type='lists_create_with')
                         mutation(items=1)
+                        value(name='ADD0')
+                          block(type='text_join')
                     value(name='slots')
                       block(type='lists_create_with')
                         mutation(items=1)
+                        value(name='ADD0')
+                          block(type='slot_block')
             next
               block(type='api_request_block', inline='false', x='20', y='20')
                 value(name='base_url')
