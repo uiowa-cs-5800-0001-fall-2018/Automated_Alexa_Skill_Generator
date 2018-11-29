@@ -15,7 +15,7 @@ block content
             .card-title.mb-4
               .d-flex.justify-content-start
                 .userData.ml-3
-                  h2.d-block.mb-3(style='font-size: 1.5rem; font-weight: bold') Tim Cook
+                  h2.d-block.mb-3(style='font-size: 1.5rem; font-weight: bold') #{name}
                   h6.d-block
                     a(href='javascript:void(0)') 11
                     |  Skills Created
@@ -32,25 +32,13 @@ block content
                       .col-sm-3.col-md-2.col-5
                         label(style='font-weight:bold;') Email
                       .col-md-8.col-6
-                        p  Tim.Cook@apple.com 
+                        p  #{email} 
                     hr
                     .row
                       .col-sm-3.col-md-2.col-5
                         label(style='font-weight:bold;') Account Created:
                       .col-md-8.col-6
-                        p  March 22, 2018 
-                    hr
-                    .row
-                      .col-sm-3.col-md-2.col-5
-                        label(style='font-weight:bold;') Fav Hobby:
-                      .col-md-8.col-6
-                        p Long Walks on the beach 
-                    hr
-                    .row
-                      .col-sm-3.col-md-2.col-5
-                        label(style='font-weight:bold;') Phobia:
-                      .col-md-8.col-6
-                        p Microsoft
+                        p  #{dateCreated} 
                     hr
   // Optional JavaScript
   // jQuery first, then Popper.js, then Bootstrap JS

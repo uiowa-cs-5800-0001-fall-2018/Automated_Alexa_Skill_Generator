@@ -12,9 +12,6 @@ router.get('/signup', function(req, res, next) {
   res.render('signup', { title: title, signed_in: req.session.signed_in , username: req.session.email});
 });
 
-router.get('/profile', function(req, res, next) {
-  res.render('profile', { title: title, signed_in: req.session.signed_in , username: req.session.email});
-});
 
 router.get('/signin', function(req, res, next) {
   res.render('signin', { title: title, signed_in: req.session.signed_in , username: req.session.email});
@@ -71,10 +68,14 @@ if (req.body.email && req.body.password) {
         return next(err);
       } else {
         req.session.userId = user._id;
-        req.session.email = user.email
+        req.session.email = user.email;
+        req.session.name = user.name;
+        req.session.username = user.username;
+        req.session.dateCreated = Date.f(user.created_at);
         req.session.signed_in = true;
+        console.log("Email: " + req.session.email);
         //return res.redirect('back');
-        return res.redirect('/profile');
+        return res.redirect('/profile', {email: req.session.email, name: req.session.name, username: req.session.username, dateCreated: req.session.dateCreated});
       }
     });
   } else {
@@ -109,7 +110,10 @@ router.post('/', function (req, res, next) {
             return next(err);
           } else {
             req.session.userId = user._id;
-            req.session.email = user.email
+            req.session.email = user.email;
+            req.session.name = user.name;
+            req.session.username = user.username;
+            req.session.dateCreated = user.created_at;
             req.session.signed_in = true;
             return res.redirect('/profile');
           }
@@ -130,7 +134,12 @@ router.get('/profile', function (req, res, next) {
           err.status = 400;
           return next(err);
         } else {
-          return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
+          req.session.userId = user._id;
+          req.session.email = user.email;
+          req.session.name = user.name;
+          req.session.username = user.username;
+          req.session.dateCreated = user.created_at;
+          res.render('profile', { title: title, signed_in: req.session.signed_in, email: req.session.email, name: req.session.name, username: req.session.username, dateCreated: req.session.dateCreated});
         }
       }
     });
