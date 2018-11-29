@@ -2,6 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c5341323-a0ae-47de-90ec-73f641abcce5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automated_Alexa_Skill_Generator_3.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/workspace.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/workspace.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/design.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/design.pug" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -106,8 +115,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/design.pug">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="183" column="26" lean-forward="true" selection-start-line="183" selection-start-column="26" selection-end-line="183" selection-end-column="26" />
+            <state relative-caret-position="569">
+              <caret line="169" column="87" lean-forward="true" selection-start-line="169" selection-start-column="87" selection-end-line="169" selection-end-column="87" />
             </state>
           </provider>
         </entry>
@@ -172,8 +181,8 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="139" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="138" />
     <option name="y" value="23" />
     <option name="width" value="1065" />
     <option name="height" value="778" />
@@ -257,7 +266,7 @@
       <updated>1540497938532</updated>
       <workItem from="1540497942088" duration="3473000" />
       <workItem from="1540753756443" duration="25672000" />
-      <workItem from="1543350681053" duration="9257000" />
+      <workItem from="1543350681053" duration="9587000" />
     </task>
     <task id="LOCAL-00001" summary="Custom block model and schema for database">
       <created>1540748347737</created>
@@ -333,11 +342,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38402000" />
+    <option name="totallyTimeSpent" value="38732000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="139" y="23" width="1065" height="778" extended-state="0" />
-    <editor active="true" />
+    <frame x="138" y="23" width="1065" height="778" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25904202" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -487,8 +495,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/design.pug">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="183" column="26" lean-forward="true" selection-start-line="183" selection-start-column="26" selection-end-line="183" selection-end-column="26" />
+        <state relative-caret-position="569">
+          <caret line="169" column="87" lean-forward="true" selection-start-line="169" selection-start-column="87" selection-end-line="169" selection-end-column="87" />
         </state>
       </provider>
     </entry>
