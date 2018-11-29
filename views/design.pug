@@ -183,6 +183,12 @@ block content
             var code = '{name: ' + value_name + ', slots: ' + value_slots + ', samples: ' + value_samples + '}';
             return [code];
         };
+        Blockly.Python['slot_block'] = function (block) {
+            var value_slot_name = Blockly.Python.valueToCode(block, 'slot_name', Blockly.Python.ORDER_ATOMIC);
+            var value_slot_type = Blockly.Python.valueToCode(block, 'slot_type', Blockly.Python.ORDER_ATOMIC);
+            var code = '{slot_name: ' + value_slot_name + ', slot_type: ' + value_slot_type + '}';
+            return [code];
+        };
         function showCode() {
             // Generate Python code and display it.
             Blockly.Python.INFINITE_LOOP_TRAP = null;

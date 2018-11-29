@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c5341323-a0ae-47de-90ec-73f641abcce5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/design.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/design.pug" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -50,14 +49,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="js" value="638" />
-          <entry key="pug" value="2343" />
+          <entry key="pug" value="2390" />
           <entry key="txt" value="589" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.spring.boot.mvc.usages" />
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Jade" value="2343" />
+          <entry key="Jade" value="2390" />
           <entry key="JavaScript" value="638" />
           <entry key="PLAIN_TEXT" value="589" />
         </counts>
@@ -107,8 +106,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/design.pug">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="64" column="47" selection-start-line="64" selection-start-column="47" selection-end-line="64" selection-end-column="47" />
+            <state relative-caret-position="454">
+              <caret line="183" column="26" lean-forward="true" selection-start-line="183" selection-start-column="26" selection-end-line="183" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -258,7 +257,7 @@
       <updated>1540497938532</updated>
       <workItem from="1540497942088" duration="3473000" />
       <workItem from="1540753756443" duration="25672000" />
-      <workItem from="1543350681053" duration="8059000" />
+      <workItem from="1543350681053" duration="9257000" />
     </task>
     <task id="LOCAL-00001" summary="Custom block model and schema for database">
       <created>1540748347737</created>
@@ -334,7 +333,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37204000" />
+    <option name="totallyTimeSpent" value="38402000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="139" y="23" width="1065" height="778" extended-state="0" />
@@ -488,8 +487,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/design.pug">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="64" column="47" selection-start-line="64" selection-start-column="47" selection-end-line="64" selection-end-column="47" />
+        <state relative-caret-position="454">
+          <caret line="183" column="26" lean-forward="true" selection-start-line="183" selection-start-column="26" selection-end-line="183" selection-end-column="26" />
         </state>
       </provider>
     </entry>
