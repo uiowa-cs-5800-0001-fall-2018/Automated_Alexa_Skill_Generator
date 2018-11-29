@@ -75,7 +75,7 @@ if (req.body.email && req.body.password) {
         req.session.signed_in = true;
         console.log("Email: " + req.session.email);
         //return res.redirect('back');
-        return res.redirect('/profile', {email: req.session.email, signed_in: req.session.signed_in, name: req.session.name, username: req.session.username, dateCreated: req.session.dateCreated});
+        return res.redirect('/profile', {email: req.session.email, name: req.session.name, username: req.session.username, dateCreated: req.session.dateCreated});
       }
     });
   } else {
@@ -139,7 +139,7 @@ router.get('/profile', function (req, res, next) {
           req.session.name = user.name;
           req.session.username = user.username;
           req.session.dateCreated = user.created_at;
-          res.render('profile', { title: title, email: req.session.email, name: req.session.name, username: req.session.username, dateCreated: req.session.dateCreated});
+          res.render('profile', { title: title, signed_in: req.session.signed_in, email: req.session.email, name: req.session.name, username: req.session.username, dateCreated: req.session.dateCreated});
         }
       }
     });
