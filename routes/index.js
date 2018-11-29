@@ -71,7 +71,7 @@ if (req.body.email && req.body.password) {
         req.session.email = user.email;
         req.session.name = user.name;
         req.session.username = user.username;
-        req.session.dateCreated = user.created_at;
+        req.session.dateCreated = Date.f(user.created_at);
         req.session.signed_in = true;
         console.log("Email: " + req.session.email);
         //return res.redirect('back');
