@@ -1,214 +1,222 @@
 extends layout
 
 block content
-  body
-    script(src="/blockly/blockly_compressed.js")
-    script(src="/blockly/blocks_compressed.js")
-    script(src="/blockly/python_compressed.js")
-    script(src="/blockly/msg/js/en.js")
-    p
-      button(onclick='showCode()') Show Python
-    p
-      button(onclick='saveToXML()') Save Workspace
-    #blocklyDiv(style='height: 600px; width: 1250px;')
-    xml#toolbox(style='display: none')
-      category(name='Logic')
-        block(type='controls_if')
-        block(type='logic_compare')
-        block(type='logic_operation')
-        block(type='logic_negate')
-        block(type='logic_boolean')
-      category(name='Loops')
-        block(type='controls_repeat_ext')
-          value(name='TIMES')
-            block(type='math_number')
-              field(name='NUM') 10
-        block(type='controls_whileUntil')
-      category(name='Math')
-        block(type='math_number')
-        block(type='math_arithmetic')
-        block(type='math_single')
-      category(name='Text')
+  script(src="/blockly/blockly_compressed.js")
+  script(src="/blockly/blocks_compressed.js")
+  script(src="/blockly/python_compressed.js")
+  script(src="/blockly/msg/js/en.js")
+  //- p
+  //-   button(onclick='showCode()') Show Python
+  //- p
+  //-   button(onclick='saveToXML()') Save Workspace
+  div(align='center')
+    #blocklyDiv(style='height: 80vh; width: 100vw;', align='left')
+    button.btn.btn-danger(onclick='showCode()', type='button') Show Code
+    button.btn.btn-danger.ml-2(onclick='saveToXML()', type='button') Save Workspace
+    //- TODO: Add function for generating skill.
+    button.btn.btn-danger.ml-2(onclick='testFunction()', type='button') Generate Skill
+  xml#toolbox(style='display: none')
+    category(name='Logic')
+      block(type='controls_if')
+      block(type='logic_compare')
+      block(type='logic_operation')
+      block(type='logic_negate')
+      block(type='logic_boolean')
+    category(name='Loops')
+      block(type='controls_repeat_ext')
+        value(name='TIMES')
+          block(type='math_number')
+            field(name='NUM') 10
+      block(type='controls_whileUntil')
+    category(name='Math')
+      block(type='math_number')
+      block(type='math_arithmetic')
+      block(type='math_single')
+    category(name='Text')
+      block(type='text')
+      block(type='text_length')
+      block(type='text_print')
+      block(type='text_join')
+    category(name='Lists')
+      block(type='lists_create_with')
+    category(name='Variables', custom='VARIABLE')
+    category(name='Alexa Skill Blocks')
+      block(type='custom_skill_name_block')
+      block(type='language_model_block')
+      block(type='intent_block')
+      block(type='slot_block')
+      block(type='api_request_block')
+      block(type='parameter_block')
+  xml#startBlocks(style='display: none')
+    block(type='custom_skill_name_block', inline='false', x='20', y='20')
+      value(name='custom_skill_name')
         block(type='text')
-        block(type='text_length')
-        block(type='text_print')
-        block(type='text_join')
-      category(name='Lists')
-        block(type='lists_create_with')
-      category(name='Variables', custom='VARIABLE')
-      category(name='Alexa Skill Blocks')
-        block(type='custom_skill_name_block')
-        block(type='language_model_block')
-        block(type='intent_block')
-        block(type='slot_block')
-        block(type='api_request_block')
-        block(type='parameter_block')
-    xml#startBlocks(style='display: none')
-      block(type='custom_skill_name_block', inline='false', x='20', y='20')
-        value(name='custom_skill_name')
-          block(type='text')
-            field(name='TEXT') SampleCustomAlexaSkill
-        next
-          block(type='language_model_block', inline='false', x='20', y='20')
-            value(name='intents')
-              block(type='lists_create_with')
-                mutation(items=1)
-                value(name='ADD0')
-                  block(type='intent_block')
-                    value(name='name')
-                      block(type='text')
-                        field(name='TEXT') CustomAlexaIntent
-                    value(name='samples')
-                      block(type='lists_create_with')
-                        mutation(items=1)
-                        value(name='ADD0')
-                          block(type='text_join')
-                    value(name='slots')
-                      block(type='lists_create_with')
-                        mutation(items=1)
-                        value(name='ADD0')
-                          block(type='slot_block')
-            next
-              block(type='api_request_block', inline='false', x='20', y='20')
-                value(name='base_url')
-                  block(type='text')
-                    field(name='TEXT') www.sampleapibaseurl.com
-                value(name='parameters')
-                  block(type='lists_create_with')
-                    mutation(items=1)
-                    value(name='ADD0')
-                      block(type='parameter_block')
-    script.
-        Blockly.Blocks['custom_skill_name_block'] = {
-            init: function () {
-                this.appendValueInput("custom_skill_name")
-                    .setCheck("String")
-                    .appendField("custom_skill_name");
-                this.setNextStatement(true, null);
-                this.setColour(120);
-                this.setTooltip("");
-                this.setHelpUrl("https://developer.amazon.com/docs/smapi/interaction-model-schema.html");
-            }
-        };
-        Blockly.Blocks['language_model_block'] = {
-            init: function () {
-                this.appendValueInput("intents")
-                    .setCheck("Array")
-                    .appendField("intents");
-                this.setPreviousStatement(true, null);
-                this.setNextStatement(true, null);
-                this.setColour(120);
-                this.setTooltip("");
-                this.setHelpUrl("https://developer.amazon.com/docs/smapi/interaction-model-schema.html");
-            }
-        };
-        Blockly.Blocks['intent_block'] = {
-            init: function () {
-                this.appendValueInput("name")
-                    .setCheck("String")
-                    .appendField("name");
-                this.appendValueInput("slots")
-                    .setCheck("Array")
-                    .appendField("slots (optional)");
-                this.appendValueInput("samples")
-                    .setCheck("Array")
-                    .appendField("samples");
-                this.setOutput(true, null);
-                this.setColour(225);
-                this.setTooltip("");
-                this.setHelpUrl("https://developer.amazon.com/docs/custom-skills/create-intents-utterances-and-slots.html");
-            }
-        };
-        Blockly.Blocks['slot_block'] = {
-            init: function () {
-                this.appendValueInput("slot_name")
-                    .setCheck("String")
-                    .appendField(new Blockly.FieldVariable("slot_name_#"), "slot_name");
-                this.appendValueInput("slot_type")
-                    .setCheck("String")
-                    .appendField("slot_type");
-                this.setOutput(true, null);
-                this.setColour(300);
-                this.setTooltip("");
-                this.setHelpUrl("https://developer.amazon.com/docs/custom-skills/create-intents-utterances-and-slots.html");
-            }
-        };
-        Blockly.Blocks['api_request_block'] = {
-            init: function () {
-                this.appendValueInput("base_url")
-                    .setCheck("String")
-                    .appendField("base_url");
-                this.appendValueInput("parameters")
-                    .setCheck("Array")
-                    .appendField("parameters");
-                this.setPreviousStatement(true, null);
-                this.setColour(120);
-                this.setTooltip("");
-                this.setHelpUrl("");
-            }
-        };
-        Blockly.Blocks['parameter_block'] = {
-            init: function () {
-                this.appendValueInput("key")
-                    .setCheck("String")
-                    .appendField("key");
-                this.appendValueInput("value")
-                    .setCheck("String")
-                    .appendField("value");
-                this.setOutput(true, null);
-                this.setColour(300);
-                this.setTooltip("");
-                this.setHelpUrl("");
-            }
-        };
-        var workspace = Blockly.inject('blocklyDiv',
-            {media: '/blockly/media/',
-            toolbox: document.getElementById('toolbox')});
-            Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
-            workspace);
-        Blockly.Python['custom_skill_name_block'] = function (block) {
-            var value_custom_skill_name = Blockly.Python.valueToCode(block, 'custom_skill_name', Blockly.Python.ORDER_ATOMIC);
-            var code = 'custom_skill_name = ' + value_custom_skill_name + '\n';
-            return code;
-        };
-        Blockly.Python['language_model_block'] = function (block) {
-            var value_intents = Blockly.Python.valueToCode(block, 'intents', Blockly.Python.ORDER_ATOMIC);
-            var code = 'intents = ' + value_intents;
-            return code;
-        };
-        Blockly.Python['intent_block'] = function (block) {
-            var value_name = Blockly.Python.valueToCode(block, 'name', Blockly.Python.ORDER_ATOMIC);
-            var value_samples = Blockly.Python.valueToCode(block, 'samples', Blockly.Python.ORDER_ATOMIC);
-            var value_slots = Blockly.Python.valueToCode(block, 'slots', Blockly.Python.ORDER_ATOMIC);
-            var code = '{name: ' + value_name + ', slots: ' + value_slots + ', samples: ' + value_samples + '}';
-            return [code];
-        };
-        Blockly.Python['slot_block'] = function (block) {
-            var value_slot_name = Blockly.Python.valueToCode(block, 'slot_name', Blockly.Python.ORDER_ATOMIC);
-            var value_slot_type = Blockly.Python.valueToCode(block, 'slot_type', Blockly.Python.ORDER_ATOMIC);
-            var code = '{slot_name: ' + value_slot_name + ', slot_type: ' + value_slot_type + '}';
-            return [code];
-        };
-        function showCode() {
-            // Generate Python code and display it.
-            Blockly.Python.INFINITE_LOOP_TRAP = null;
-            var code = Blockly.Python.workspaceToCode(workspace);
-            alert(code);
-        }
-        function runCode() {
-            // Generate Python code and run it.
-            window.LoopTrap = 1000;
-            Blockly.Python.INFINITE_LOOP_TRAP =
-            'if (--window.LoopTrap == 0) throw "Infinite loop.";\\n';
-            var code = Blockly.Python.workspaceToCode(workspace);
-            Blockly.Python.INFINITE_LOOP_TRAP = null;
-            try {
-                eval(code);
-            } catch (e) {
-                alert(e);
-            }
-        }
-        function saveToXML(){
-          var xml = Blockly.Xml.workspaceToDom(workspace);
-          var xml_text = Blockly.Xml.domToText(xml);
-        }
+          field(name='TEXT') SampleCustomAlexaSkill
+      next
+        block(type='language_model_block', inline='false', x='20', y='20')
+          value(name='intents')
+            block(type='lists_create_with')
+              mutation(items=1)
+              value(name='ADD0')
+                block(type='intent_block')
+                  value(name='name')
+                    block(type='text')
+                      field(name='TEXT') CustomAlexaIntent
+                  value(name='samples')
+                    block(type='lists_create_with')
+                      mutation(items=1)
+                      value(name='ADD0')
+                        block(type='text_join')
+                  value(name='slots')
+                    block(type='lists_create_with')
+                      mutation(items=1)
+                      value(name='ADD0')
+                        block(type='slot_block')
+          next
+            block(type='api_request_block', inline='false', x='20', y='20')
+              value(name='base_url')
+                block(type='text')
+                  field(name='TEXT') www.sampleapibaseurl.com
+              value(name='parameters')
+                block(type='lists_create_with')
+                  mutation(items=1)
+                  value(name='ADD0')
+                    block(type='parameter_block')
+  script.
+      Blockly.Blocks['custom_skill_name_block'] = {
+          init: function () {
+              this.appendValueInput("custom_skill_name")
+                  .setCheck("String")
+                  .appendField("custom_skill_name");
+              this.setNextStatement(true, null);
+              this.setColour(120);
+              this.setTooltip("");
+              this.setHelpUrl("https://developer.amazon.com/docs/smapi/interaction-model-schema.html");
+          }
+      };
+      Blockly.Blocks['language_model_block'] = {
+          init: function () {
+              this.appendValueInput("intents")
+                  .setCheck("Array")
+                  .appendField("intents");
+              this.setPreviousStatement(true, null);
+              this.setNextStatement(true, null);
+              this.setColour(120);
+              this.setTooltip("");
+              this.setHelpUrl("https://developer.amazon.com/docs/smapi/interaction-model-schema.html");
+          }
+      };
+      Blockly.Blocks['intent_block'] = {
+          init: function () {
+              this.appendValueInput("name")
+                  .setCheck("String")
+                  .appendField("name");
+              this.appendValueInput("slots")
+                  .setCheck("Array")
+                  .appendField("slots (optional)");
+              this.appendValueInput("samples")
+                  .setCheck("Array")
+                  .appendField("samples");
+              this.setOutput(true, null);
+              this.setColour(225);
+              this.setTooltip("");
+              this.setHelpUrl("https://developer.amazon.com/docs/custom-skills/create-intents-utterances-and-slots.html");
+          }
+      };
+      Blockly.Blocks['slot_block'] = {
+          init: function () {
+              this.appendValueInput("slot_name")
+                  .setCheck("String")
+                  .appendField(new Blockly.FieldVariable("slot_name_#"), "slot_name");
+              this.appendValueInput("slot_type")
+                  .setCheck("String")
+                  .appendField("slot_type");
+              this.setOutput(true, null);
+              this.setColour(300);
+              this.setTooltip("");
+              this.setHelpUrl("https://developer.amazon.com/docs/custom-skills/create-intents-utterances-and-slots.html");
+          }
+      };
+      Blockly.Blocks['api_request_block'] = {
+          init: function () {
+              this.appendValueInput("base_url")
+                  .setCheck("String")
+                  .appendField("base_url");
+              this.appendValueInput("parameters")
+                  .setCheck("Array")
+                  .appendField("parameters");
+              this.setPreviousStatement(true, null);
+              this.setColour(120);
+              this.setTooltip("");
+              this.setHelpUrl("");
+          }
+      };
+      Blockly.Blocks['parameter_block'] = {
+          init: function () {
+              this.appendValueInput("key")
+                  .setCheck("String")
+                  .appendField("key");
+              this.appendValueInput("value")
+                  .setCheck("String")
+                  .appendField("value");
+              this.setOutput(true, null);
+              this.setColour(300);
+              this.setTooltip("");
+              this.setHelpUrl("");
+          }
+      };
+      Blockly.Python['custom_skill_name_block'] = function (block) {
+          var value_custom_skill_name = Blockly.Python.valueToCode(block, 'custom_skill_name', Blockly.Python.ORDER_ATOMIC);
+          var code = 'custom_skill_name = ' + value_custom_skill_name + '\n';
+          return code;
+      };
+      Blockly.Python['language_model_block'] = function (block) {
+          var value_intents = Blockly.Python.valueToCode(block, 'intents', Blockly.Python.ORDER_ATOMIC);
+          var code = 'intents = ' + value_intents;
+          return code;
+      };
+      Blockly.Python['intent_block'] = function (block) {
+          var value_name = Blockly.Python.valueToCode(block, 'name', Blockly.Python.ORDER_ATOMIC);
+          var value_samples = Blockly.Python.valueToCode(block, 'samples', Blockly.Python.ORDER_ATOMIC);
+          var value_slots = Blockly.Python.valueToCode(block, 'slots', Blockly.Python.ORDER_ATOMIC);
+          var code = '{name: ' + value_name + ', slots: ' + value_slots + ', samples: ' + value_samples + '}';
+          return [code];
+      };
+      Blockly.Python['slot_block'] = function (block) {
+          var value_slot_name = Blockly.Python.valueToCode(block, 'slot_name', Blockly.Python.ORDER_ATOMIC);
+          var value_slot_type = Blockly.Python.valueToCode(block, 'slot_type', Blockly.Python.ORDER_ATOMIC);
+          var code = '{slot_name: ' + value_slot_name + ', slot_type: ' + value_slot_type + '}';
+          return [code];
+      };
+      var workspace = Blockly.inject('blocklyDiv',
+          {media: '/blockly/media/',
+          toolbox: document.getElementById('toolbox')});
+          Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
+          workspace);
+      function showCode() {
+          // Generate Python code and display it.
+          Blockly.Python.INFINITE_LOOP_TRAP = null;
+          var code = Blockly.Python.workspaceToCode(workspace);
+          alert(code);
+      }
+      function testFunction() {
+          // Makes popup alert.
+          alert('This functionality is under construction.');
+      }
+      function runCode() {
+          // Generate Python code and run it.
+          window.LoopTrap = 1000;
+          Blockly.Python.INFINITE_LOOP_TRAP =
+          'if (--window.LoopTrap == 0) throw "Infinite loop.";\\n';
+          var code = Blockly.Python.workspaceToCode(workspace);
+          Blockly.Python.INFINITE_LOOP_TRAP = null;
+          try {
+              eval(code);
+          } catch (e) {
+              alert(e);
+          }
+      }
+      function saveToXML(){
+        var xml = Blockly.Xml.workspaceToDom(workspace);
+        var xml_text = Blockly.Xml.domToText(xml);
+      }
