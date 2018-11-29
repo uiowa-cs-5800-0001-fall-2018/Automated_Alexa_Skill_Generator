@@ -40,6 +40,7 @@ block content
         block(type='custom_skill_name_block')
         block(type='language_model_block')
         block(type='intent_block')
+        block(type='slot_block')
     xml#startBlocks(style='display: none')
       block(type='custom_skill_name_block', inline='false', x='20', y='20')
         value(name='custom_skill_name')
@@ -99,6 +100,20 @@ block content
                     .appendField("samples");
                 this.setOutput(true, null);
                 this.setColour(225);
+                this.setTooltip("");
+                this.setHelpUrl("https://developer.amazon.com/docs/custom-skills/create-intents-utterances-and-slots.html");
+            }
+        };
+        Blockly.Blocks['slot_block'] = {
+            init: function () {
+                this.appendValueInput("slot_name")
+                    .setCheck("String")
+                    .appendField(new Blockly.FieldVariable("slot_name_#"), "slot_name");
+                this.appendValueInput("slot_type")
+                    .setCheck("String")
+                    .appendField("slot_type");
+                this.setOutput(true, null);
+                this.setColour(300);
                 this.setTooltip("");
                 this.setHelpUrl("https://developer.amazon.com/docs/custom-skills/create-intents-utterances-and-slots.html");
             }
