@@ -75,7 +75,7 @@ if (req.body.email && req.body.password) {
         req.session.signed_in = true;
         console.log("Email: " + req.session.email);
         //return res.redirect('back');
-        return res.redirect('/profile', {email: req.session.email, name: req.session.name, username: req.session.username, dateCreated: req.session.dateCreated});
+        return res.redirect('/profile', {email: req.session.email, signed_in: req.session.signed_in, name: req.session.name, username: req.session.username, dateCreated: req.session.dateCreated});
       }
     });
   } else {
