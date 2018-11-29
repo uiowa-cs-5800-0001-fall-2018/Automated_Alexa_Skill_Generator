@@ -9,6 +9,14 @@ var usersRouter = require('./routes/users');
 var session = require('express-session');
 
 var app = express();
+var cmd = require('node-cmd')
+
+cmd.get(
+   'echo hello-world',
+   function(err, data, stderr){
+       console.log('Terminal output : ' , data)
+   }
+);
 
 app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/css/'))
 
