@@ -41,6 +41,8 @@ block content
         block(type='language_model_block')
         block(type='intent_block')
         block(type='slot_block')
+        block(type='api_request_block')
+        block(type='parameter_block')
     xml#startBlocks(style='display: none')
       block(type='custom_skill_name_block', inline='false', x='20', y='20')
         value(name='custom_skill_name')
@@ -58,11 +60,20 @@ block content
                         field(name='TEXT') CustomAlexaIntent
                     value(name='samples')
                       block(type='lists_create_with')
-                        mutation(items=0)
+                        mutation(items=1)
                     value(name='slots')
                       block(type='lists_create_with')
-                        mutation(items=0)
-
+                        mutation(items=1)
+            next
+              block(type='api_request_block', inline='false', x='20', y='20')
+                value(name='base_url')
+                  block(type='text')
+                    field(name='TEXT') www.sampleapibaseurl.com
+                value(name='parameters')
+                  block(type='lists_create_with')
+                    mutation(items=1)
+                    value(name='ADD0')
+                      block(type='parameter_block')
     script.
         Blockly.Blocks['custom_skill_name_block'] = {
             init: function () {
@@ -70,7 +81,7 @@ block content
                     .setCheck("String")
                     .appendField("custom_skill_name");
                 this.setNextStatement(true, null);
-                this.setColour(100);
+                this.setColour(120);
                 this.setTooltip("");
                 this.setHelpUrl("https://developer.amazon.com/docs/smapi/interaction-model-schema.html");
             }
@@ -82,7 +93,7 @@ block content
                     .appendField("intents");
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(true, null);
-                this.setColour(100);
+                this.setColour(120);
                 this.setTooltip("");
                 this.setHelpUrl("https://developer.amazon.com/docs/smapi/interaction-model-schema.html");
             }
@@ -116,6 +127,34 @@ block content
                 this.setColour(300);
                 this.setTooltip("");
                 this.setHelpUrl("https://developer.amazon.com/docs/custom-skills/create-intents-utterances-and-slots.html");
+            }
+        };
+        Blockly.Blocks['api_request_block'] = {
+            init: function () {
+                this.appendValueInput("base_url")
+                    .setCheck("String")
+                    .appendField("base_url");
+                this.appendValueInput("parameters")
+                    .setCheck("Array")
+                    .appendField("parameters");
+                this.setPreviousStatement(true, null);
+                this.setColour(120);
+                this.setTooltip("");
+                this.setHelpUrl("");
+            }
+        };
+        Blockly.Blocks['parameter_block'] = {
+            init: function () {
+                this.appendValueInput("key")
+                    .setCheck("String")
+                    .appendField("key");
+                this.appendValueInput("value")
+                    .setCheck("String")
+                    .appendField("value");
+                this.setOutput(true, null);
+                this.setColour(300);
+                this.setTooltip("");
+                this.setHelpUrl("");
             }
         };
         var workspace = Blockly.inject('blocklyDiv',

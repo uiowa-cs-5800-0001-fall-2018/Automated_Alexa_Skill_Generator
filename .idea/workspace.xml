@@ -49,14 +49,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="js" value="638" />
-          <entry key="pug" value="2083" />
+          <entry key="pug" value="2309" />
           <entry key="txt" value="589" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.spring.boot.mvc.usages" />
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Jade" value="2083" />
+          <entry key="Jade" value="2309" />
           <entry key="JavaScript" value="638" />
           <entry key="PLAIN_TEXT" value="589" />
         </counts>
@@ -106,8 +106,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/design.pug">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="42" column="32" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
+            <state relative-caret-position="323">
+              <caret line="75" column="22" selection-start-line="75" selection-start-column="22" selection-end-line="75" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -257,7 +257,7 @@
       <updated>1540497938532</updated>
       <workItem from="1540497942088" duration="3473000" />
       <workItem from="1540753756443" duration="25672000" />
-      <workItem from="1543350681053" duration="6443000" />
+      <workItem from="1543350681053" duration="7720000" />
     </task>
     <task id="LOCAL-00001" summary="Custom block model and schema for database">
       <created>1540748347737</created>
@@ -333,7 +333,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35588000" />
+    <option name="totallyTimeSpent" value="36865000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="140" y="23" width="1065" height="778" extended-state="0" />
@@ -487,8 +487,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/design.pug">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="42" column="32" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
+        <state relative-caret-position="323">
+          <caret line="75" column="22" selection-start-line="75" selection-start-column="22" selection-end-line="75" selection-end-column="22" />
         </state>
       </provider>
     </entry>
