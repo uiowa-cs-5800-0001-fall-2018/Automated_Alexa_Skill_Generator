@@ -32,12 +32,15 @@ block content
       block(type='text')
       block(type='text_length')
       block(type='text_print')
+      block(type='text_join')
     category(name='Lists')
       block(type='lists_create_with')
+    category(name="Variables" custom="VARIABLE")
     category(name='Alexa Skill Blocks')
       block(type='custom_skill_name_block')
       block(type='language_model_block')
       block(type='intent_block')
+      block(type='slot_block')
   xml#startBlocks(style='display: none')
     block(type='custom_skill_name_block', inline='false', x='20', y='20')
       value(name='custom_skill_name')
@@ -47,51 +50,18 @@ block content
         block(type='language_model_block', inline='false', x='20', y='20')
           value(name='intents')
             block(type='lists_create_with')
-              mutation(items=4)
+              mutation(items=1)
               value(name='ADD0')
-                block(type='intent_block')
-                  value(name='name')
-                    block(type='text')
-                      field(name='TEXT') AMAZON.CancelIntent
-                  value(name='samples')
-                    block(type='lists_create_with')
-                      mutation(items=0)
-                  value(name='slots')
-                    block(type='lists_create_with')
-                      mutation(items=0)
-              value(name='ADD1')
-                block(type='intent_block')
-                  value(name='name')
-                    block(type='text')
-                      field(name='TEXT') AMAZON.HelpIntent
-                  value(name='samples')
-                    block(type='lists_create_with')
-                      mutation(items=0)
-                  value(name='slots')
-                    block(type='lists_create_with')
-                      mutation(items=0)
-              value(name='ADD2')
-                block(type='intent_block')
-                  value(name='name')
-                    block(type='text')
-                      field(name='TEXT') AMAZON.StopIntent
-                  value(name='samples')
-                    block(type='lists_create_with')
-                      mutation(items=0)
-                  value(name='slots')
-                    block(type='lists_create_with')
-                      mutation(items=0)
-              value(name='ADD3')
                 block(type='intent_block')
                   value(name='name')
                     block(type='text')
                       field(name='TEXT') CustomAlexaIntent
                   value(name='samples')
                     block(type='lists_create_with')
-                      mutation(items=0)
+                      mutation(items=1)
                   value(name='slots')
                     block(type='lists_create_with')
-                      mutation(items=0)
+                      mutation(items=1)
 
   script.
       Blockly.Blocks['custom_skill_name_block'] = {
@@ -103,6 +73,20 @@ block content
               this.setColour(100);
               this.setTooltip("");
               this.setHelpUrl("https://developer.amazon.com/docs/smapi/interaction-model-schema.html");
+          }
+      };
+      Blockly.Blocks['slot_block'] = {
+          init: function () {
+              this.appendValueInput("slot_name")
+                  .setCheck("String")
+                  .appendField(new Blockly.FieldVariable("slot_name_#"), "slot_name");
+              this.appendValueInput("slot_type")
+                  .setCheck("String")
+                  .appendField("slot_type");
+              this.setOutput(true, null);
+              this.setColour(300);
+              this.setTooltip("");
+              this.setHelpUrl("https://developer.amazon.com/docs/custom-skills/create-intents-utterances-and-slots.html");
           }
       };
       Blockly.Blocks['language_model_block'] = {
