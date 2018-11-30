@@ -189,6 +189,18 @@ block content
             var code = '{slot_name: ' + value_slot_name + ', slot_type: ' + value_slot_type + '}';
             return [code];
         };
+        Blockly.Python['parameter_block'] = function (block) {
+            var value_key = Blockly.Python.valueToCode(block, 'key', Blockly.Python.ORDER_ATOMIC);
+            var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
+            var code = '{key: ' + value_key + ', value: ' + value_value + '}';
+            return [code];
+        };
+        Blockly.Python['api_request_block'] = function (block) {
+            var value_base_url = Blockly.Python.valueToCode(block, 'base_url', Blockly.Python.ORDER_ATOMIC);
+            var value_parameters = Blockly.Python.valueToCode(block, 'parameters', Blockly.Python.ORDER_ATOMIC);
+            var code = '{base_url: ' + value_base_url+ ', parameters: ' + value_parameters + '}';
+            return [code];
+        };
         function showCode() {
             // Generate Python code and display it.
             Blockly.Python.INFINITE_LOOP_TRAP = null;
