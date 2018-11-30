@@ -6,12 +6,12 @@ block content
     script(src="/blockly/blocks_compressed.js")
     script(src="/blockly/python_compressed.js")
     script(src="/blockly/msg/js/en.js")
-      div.mt-2(align='center')
-            #blocklyDiv(style='height: 80vh; width: 100vw;', align='left')
-            button.btn.btn-danger.mt-2(onclick='showCode()', type='button') Show Code
-            button.btn.btn-danger.ml-2.mt-2(onclick='saveToXML()', type='button') Save Workspace
-            //- TODO: Add function for generating skill.
-            button.btn.btn-danger.ml-2.mt-2(onclick='testFunction()', type='button') Generate Skill
+    div.mt-2(align='center')
+      #blocklyDiv(style='height: 80vh; width: 100vw;', align='left')
+      button.btn.btn-danger.mt-2(onclick='showCode()', type='button') Show Code
+      button.btn.btn-danger.ml-2.mt-2(onclick='saveToXML()', type='button') Save Workspace
+      //- TODO: Add function for generating skill.
+      button.btn.btn-danger.ml-2.mt-2(onclick='testFunction()', type='button') Generate Skill
     xml#toolbox(style='display: none')
       category(name='Logic')
         block(type='controls_if')
