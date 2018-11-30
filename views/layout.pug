@@ -17,23 +17,26 @@ html
           a.nav-link.ml-2.mr-2(href='/#home') Home
         li.nav-item
           a.nav-link.ml-2.mr-2(href='/#about') About
-        if signed_in
-          li.nav-item.dropdown
-            a#navbardrop.nav-link.dropdown-toggle.mr-2.ml-2(href='#', data-toggle='dropdown') Account
-            .dropdown-menu
-              a.dropdown-item(href='/profile') Profile
-              // TODO: Link to dashboard if we have one, otherwise remove.
-              // a.dropdown-item() Dashboard
-              a.dropdown-item(href='/logout') Sign Out
+        if signed_in 
+          li.nav-item
+            a.nav-link.ml-2.mr-2(href='/profile') Profile
+          a(href='/logout')
+            button.btn.btn-danger(type='button') Sign Out
         else
           a(href='/signin')
             button.btn.btn-primary(type='button') Sign In
           a(href='/signup')
             button.btn.btn-primary.ml-2(type='button') Register
       .d-flex.flex-row-reverse.bd-highlight.col-3
-        a(href='/design')
-          button.btn.btn-danger(type='button')
-            | New Skill 
-            i.fas.fa-plus-square(style='margin-left: 8px')
+        if signed_in
+          a(href='/design')
+            button.btn.btn-success(type='button')
+              | New Skill 
+              i.fas.fa-plus-square(style='margin-left: 8px')
+        else
+          a(href='/design')
+            button.btn.btn-success(type='button', disabled)
+              | New Skill 
+              i.fas.fa-plus-square(style='margin-left: 8px')
   body.pt-5
     block content

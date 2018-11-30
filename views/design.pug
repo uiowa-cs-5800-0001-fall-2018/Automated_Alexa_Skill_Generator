@@ -6,11 +6,12 @@ block content
     script(src="/blockly/blocks_compressed.js")
     script(src="/blockly/python_compressed.js")
     script(src="/blockly/msg/js/en.js")
-    p
-      button(onclick='showCode()') Show Python
-    p
-      button(onclick='saveToXML()') Save Workspace
-    #blocklyDiv(style='height: 600px; width: 1250px;')
+      div.mt-2(align='center')
+            #blocklyDiv(style='height: 80vh; width: 100vw;', align='left')
+            button.btn.btn-danger.mt-2(onclick='showCode()', type='button') Show Code
+            button.btn.btn-danger.ml-2.mt-2(onclick='saveToXML()', type='button') Save Workspace
+            //- TODO: Add function for generating skill.
+            button.btn.btn-danger.ml-2.mt-2(onclick='testFunction()', type='button') Generate Skill
     xml#toolbox(style='display: none')
       category(name='Logic')
         block(type='controls_if')
@@ -187,18 +188,6 @@ block content
             var value_slot_name = Blockly.Python.valueToCode(block, 'slot_name', Blockly.Python.ORDER_ATOMIC);
             var value_slot_type = Blockly.Python.valueToCode(block, 'slot_type', Blockly.Python.ORDER_ATOMIC);
             var code = '{slot_name: ' + value_slot_name + ', slot_type: ' + value_slot_type + '}';
-            return [code];
-        };
-        Blockly.Python['parameter_block'] = function (block) {
-            var value_key = Blockly.Python.valueToCode(block, 'key', Blockly.Python.ORDER_ATOMIC);
-            var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
-            var code = '{key: ' + value_key + ', value: ' + value_value + '}';
-            return [code];
-        };
-        Blockly.Python['api_request_block'] = function (block) {
-            var value_base_url = Blockly.Python.valueToCode(block, 'base_url', Blockly.Python.ORDER_ATOMIC);
-            var value_parameters = Blockly.Python.valueToCode(block, 'parameters', Blockly.Python.ORDER_ATOMIC);
-            var code = '{base_url: ' + value_base_url+ ', parameters: ' + value_parameters + '}';
             return [code];
         };
         function showCode() {
