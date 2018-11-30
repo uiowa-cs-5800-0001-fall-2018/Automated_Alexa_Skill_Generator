@@ -28,15 +28,10 @@ html
           a(href='/signup')
             button.btn.btn-primary.ml-2(type='button') Register
       .d-flex.flex-row-reverse.bd-highlight.col-3
-        if signed_in
-          a(href='/design')
+        a(href='/design')
             button.btn.btn-success(type='button')
               | New Skill 
               i.fas.fa-plus-square(style='margin-left: 8px')
-        else
-          a(href='/design')
-            button.btn.btn-success(type='button', disabled)
-              | New Skill 
-              i.fas.fa-plus-square(style='margin-left: 8px')
+          
   body.pt-5
     block content
