@@ -174,7 +174,7 @@ block content
         };
         Blockly.Python['language_model_block'] = function (block) {
             var value_intents = Blockly.Python.valueToCode(block, 'intents', Blockly.Python.ORDER_ATOMIC);
-            var code = 'intents = ' + value_intents;
+            var code = 'intents = ' + value_intents + '\n';
             return code;
         };
         Blockly.Python['intent_block'] = function (block) {
@@ -190,7 +190,7 @@ block content
             var code = '{slot_name: ' + value_slot_name + ', slot_type: ' + value_slot_type + '}';
             return [code];
         };
-        Blockly.Python['parameters_block'] = function (block) {
+        Blockly.Python['parameter_block'] = function (block) {
             var value_key = Blockly.Python.valueToCode(block, 'key', Blockly.Python.ORDER_ATOMIC);
             var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
             var code = '{key: ' + value_key + ', value: ' + value_value + '}';
@@ -199,7 +199,7 @@ block content
         Blockly.Python['api_request_block'] = function (block) {
             var value_base_url = Blockly.Python.valueToCode(block, 'base_url', Blockly.Python.ORDER_ATOMIC);
             var value_parameters = Blockly.Python.valueToCode(block, 'parameters', Blockly.Python.ORDER_ATOMIC);
-            var code = '{base_url: ' + value_base_url + ', parameters: ' + value_parameters + '}';
+            var code = 'api_request = {base_url: ' + value_base_url + ', parameters: ' + value_parameters + '}' + '\n';
             return [code];
         };
         function showCode() {
