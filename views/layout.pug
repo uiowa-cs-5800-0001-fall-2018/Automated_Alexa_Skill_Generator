@@ -20,8 +20,8 @@ html
         if signed_in 
           li.nav-item
             a.nav-link.ml-2.mr-2(href='/profile') Profile
-          li.nav-item
-            a.nav-link.ml-2.mr-2(href='/logout') Sign Out
+          a(href='/logout')
+            button.btn.btn-danger(type='button') Sign Out
         else
           a(href='/signin')
             button.btn.btn-primary(type='button') Sign In
@@ -30,12 +30,12 @@ html
       .d-flex.flex-row-reverse.bd-highlight.col-3
         if signed_in
           a(href='/design')
-            button.btn.btn-danger(type='button')
+            button.btn.btn-success(type='button')
               | New Skill 
               i.fas.fa-plus-square(style='margin-left: 8px')
         else
           a(href='/design')
-            button.btn.btn-danger(type='button', disabled)
+            button.btn.btn-success(type='button', disabled)
               | New Skill 
               i.fas.fa-plus-square(style='margin-left: 8px')
   body.pt-5
