@@ -69,16 +69,16 @@ block content
                         mutation(items=1)
                         value(name='ADD0')
                           block(type='slot_block')
-            next
-              block(type='api_request_block', inline='false', x='20', y='20')
-                value(name='base_url')
-                  block(type='text')
-                    field(name='TEXT') www.sampleapibaseurl.com
-                value(name='parameters')
-                  block(type='lists_create_with')
-                    mutation(items=1)
-                    value(name='ADD0')
-                      block(type='parameter_block')
+                    value(name='lambda_function')
+                      block(type='api_request_block', inline='false', x='20', y='20')
+                        value(name='base_url')
+                          block(type='text')
+                            field(name='TEXT') www.sampleapibaseurl.com
+                        value(name='parameters')
+                          block(type='lists_create_with')
+                            mutation(items=1)
+                              value(name='ADD0')
+                                block(type='parameter_block')
     script.
         Blockly.Blocks['custom_skill_name_block'] = {
             init: function () {
@@ -97,7 +97,7 @@ block content
                     .setCheck("Array")
                     .appendField("intents");
                 this.setPreviousStatement(true, null);
-                this.setNextStatement(true, null);
+                //this.setNextStatement(true, null);
                 this.setColour(120);
                 this.setTooltip("");
                 this.setHelpUrl("https://developer.amazon.com/docs/smapi/interaction-model-schema.html");
@@ -114,6 +114,8 @@ block content
                 this.appendValueInput("samples")
                     .setCheck("Array")
                     .appendField("samples");
+                this.appendValueInput("lambda_function")
+                    .appendField("lambda_function");
                 this.setOutput(true, null);
                 this.setColour(225);
                 this.setTooltip("");
@@ -124,7 +126,7 @@ block content
             init: function () {
                 this.appendValueInput("slot_name")
                     .setCheck("String")
-                    .appendField(new Blockly.FieldVariable("slot_name_#"), "slot_name");
+                    .appendField("slot_name");
                 this.appendValueInput("slot_type")
                     .setCheck("String")
                     .appendField("slot_type");
@@ -142,7 +144,7 @@ block content
                 this.appendValueInput("parameters")
                     .setCheck("Array")
                     .appendField("parameters");
-                this.setPreviousStatement(true, null);
+                this.setOutput(true, null);
                 this.setColour(120);
                 this.setTooltip("");
                 this.setHelpUrl("");
@@ -181,7 +183,8 @@ block content
             var value_name = Blockly.Python.valueToCode(block, 'name', Blockly.Python.ORDER_ATOMIC);
             var value_samples = Blockly.Python.valueToCode(block, 'samples', Blockly.Python.ORDER_ATOMIC);
             var value_slots = Blockly.Python.valueToCode(block, 'slots', Blockly.Python.ORDER_ATOMIC);
-            var code = '{name: ' + value_name + ', slots: ' + value_slots + ', samples: ' + value_samples + '}';
+            var value_lambda_function = Blockly.Python.valueToCode(block, 'lambda_function', Blockly.Python.ORDER_ATOMIC);
+            var code = '{name: ' + value_name + ', slots: ' + value_slots + ', samples: ' + value_samples + ', lambda_function: ' + value_lambda_function + '}';
             return [code];
         };
         Blockly.Python['slot_block'] = function (block) {
@@ -199,7 +202,7 @@ block content
         Blockly.Python['api_request_block'] = function (block) {
             var value_base_url = Blockly.Python.valueToCode(block, 'base_url', Blockly.Python.ORDER_ATOMIC);
             var value_parameters = Blockly.Python.valueToCode(block, 'parameters', Blockly.Python.ORDER_ATOMIC);
-            var code = 'api_request = {base_url: ' + value_base_url + ', parameters: ' + value_parameters + '}' + '\n';
+            var code = '{base_url: ' + value_base_url + ', parameters: ' + value_parameters + '}' + '\n';
             return [code];
         };
         function showCode() {
