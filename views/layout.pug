@@ -17,14 +17,11 @@ html
           a.nav-link.ml-2.mr-2(href='/#home') Home
         li.nav-item
           a.nav-link.ml-2.mr-2(href='/#about') About
-        if signed_in
-          li.nav-item.dropdown
-            a#navbardrop.nav-link.dropdown-toggle.mr-2.ml-2(href='#', data-toggle='dropdown') Account
-            .dropdown-menu
-              a.dropdown-item(href='/profile') Profile
-              // TODO: Link to dashboard if we have one, otherwise remove.
-              // a.dropdown-item() Dashboard
-              a.dropdown-item(href='/logout') Sign Out
+        if signed_in 
+          li.nav-item
+            a.nav-link.ml-2.mr-2(href='/profile') Profile
+          li.nav-item
+            a.nav-link.ml-2.mr-2(href='/logout') Sign Out
         else
           a(href='/signin')
             button.btn.btn-primary(type='button') Sign In
