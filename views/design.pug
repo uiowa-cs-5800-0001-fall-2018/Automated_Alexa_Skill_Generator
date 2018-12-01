@@ -11,7 +11,9 @@ block content
       button.btn.btn-danger.mt-2(onclick='showCode()', type='button') Show Code
       button.btn.btn-danger.ml-2.mt-2(onclick='saveToXML()', type='button') Save Workspace
       //- TODO: Add function for generating skill.
-      button.btn.btn-danger.ml-2.mt-2(onclick='testFunction()', type='button') Generate Skill
+      form(method="POST" action="/blocklyData")
+        input(type="hidden" id="hidden" name="content" vlaue="<?php echo $row[1] ?>")
+        button.btn.btn-danger.mt-2(name="show-code" onclick='sendCodeToServer()' type='submit') Generate Skill
     xml#toolbox(style='display: none')
       category(name='Logic')
         block(type='controls_if')
