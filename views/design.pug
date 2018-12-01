@@ -179,11 +179,9 @@ block content
             }
         };
         var workspace = Blockly.inject('blocklyDiv',
-            {
-                media: '/blockly/media/',
-                toolbox: document.getElementById('toolbox')
-            });
-        Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
+            {media: '/blockly/media/',
+            toolbox: document.getElementById('toolbox')});
+            Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
             workspace);
         Blockly.JavaScript['language_model_block'] = function (block) {
             var value_custom_skill_name = Blockly.JavaScript.valueToCode(block, 'custom_skill_name', Blockly.JavaScript.ORDER_ATOMIC);
@@ -224,6 +222,13 @@ block content
             var code = '{base_url: ' + value_base_url + ', parameters: ' + value_parameters + '}' + '\n';
             return [code];
         };
+        function sendCodeToServer() {
+            // Generate Python code and display it.
+            Blockly.Python.INFINITE_LOOP_TRAP = null;
+            var code = Blockly.Python.workspaceToCode(workspace);
+            document.getElementById("hidden").value = code;
+            //- alert(code);
+        }
         function showCode() {
             // Generate JS code and display it.
             Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
