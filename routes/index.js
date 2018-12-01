@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var templater = require('../templater')
 var title = 'Alexa Automated'
 
 /* GET home page. */
@@ -21,6 +22,10 @@ router.get('/design', function(req, res, next){
   res.render('design', { title: title, signed_in: req.session.signed_in , username: req.session.email});
 });
 
+router.get('/generatedSkill', function(req, res, next){
+  res.render('generatedSkill', { title: title, signed_in: req.session.signed_in , username: req.session.email});
+});
+
 
 // GET for logout logout
 router.get('/logout', function (req, res, next) {
@@ -35,6 +40,14 @@ router.get('/logout', function (req, res, next) {
     });
   }
 });
+
+// (POST) Get blockly data from a workspace
+router.post('/blocklyData', function (req, res) {
+  // formatedCode = templater.format_code(req.body)
+  let skillJSON = JSON.stringify(req.body)
+  let lambdaCode = templater.formatCode()
+  res.render('generatedSkill', {skillJSON: skillJSON, lambdaCode: lambdaCode});
+  });
 
 // POST authenticate for sign in behavior
 router.post('/authenticate', function (req, res, next) {
@@ -67,7 +80,7 @@ if (req.body.email && req.body.password) {
         err.status = 401;
         return next(err);
       } else {
-        req.session.userId = user._id;
+        req.session.userId = user._id;  
         req.session.email = user.email;
         req.session.name = user.name;
         req.session.username = user.username;
@@ -86,6 +99,7 @@ if (req.body.email && req.body.password) {
 });
 
 router.post('/', function (req, res, next) {
+  console.log("Im on the homepage!")
   if (req.body.email &&
     req.body.username &&
     req.body.name &&
