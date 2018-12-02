@@ -1,21 +1,133 @@
-let quote = "Dont do dumb shit"
-var data = `/* eslint-disable func-names */ /* eslint-disable no-console */ const quoteHelper = require('./modules/quoteHelper') const Alexa = require('ask-sdk-core'); const LaunchRequestHandler = { canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === 'LaunchRequest'; }, async handle(handlerInput) { let speechText = 'I dont have a quote'; await quoteHelper.getQuote().then(function(value){ let quote = JSON.parse(value).quote speechText = \`Here is a quote: ${quote}\` }, function(err){ speechText = "There was a problem" }) return handlerInput.responseBuilder .speak(speechText) .withSimpleCard('Random Quote', speechText) .getResponse(); }, };"`
-var beautify = require('js-beautify').js,
-fs = require('fs');
+var jsFormatter = require('esformatter')
 
-exports.formatCode = function(){
-    let beautifulCode = beautify(data, { indent_size: 2, space_in_empty_paren: true })
-    return beautifulCode
+module.exports.LibraryImportHandler = function(){
+  let importHandlerTemplate = 
+    `const Alexa = require('ask-sdk-core');`
+  return jsFormatter.format(importHandlerTemplate)
 }
 
-/////////////////////
-// Write to a file //
-/////////////////////
-// fs.writeFile("foo.js", String(beautifulCode), function(err) {
-//     if(err) {
-//         return console.log(err);
-//     }
+module.exports.LaunchRequestHandler = function(launchRequestSpeech){
+  let launchRequestHandlerTemplate = 
+    `const LaunchRequestHandler = {
+      canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === '${launchRequestSpeech}';
+      },
+      handle(handlerInput) {
+        const speechText = 'Welcome to the Alexa Skills Kit, you can say hello!';
 
-//     console.log("The file was saved!");
-// }); 
+        return handlerInput.responseBuilder
+          .speak(speechText)
+          .reprompt(speechText)
+          .getResponse();   
+      },
+    };`
+  return jsFormatter.format(launchRequestHandlerTemplate)
+}
 
+module.exports.HelpIntentHandler = function(helpIntentSpeech){
+  let helpIntentHandlerTemplate = 
+    `const HelpIntentHandler = {
+      canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+          && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
+      },
+      handle(handlerInput) {
+        const speechText = '${helpIntentSpeech}';
+    
+        return handlerInput.responseBuilder
+          .speak(speechText)
+          .reprompt(speechText)
+          .getResponse();
+      },
+    };`
+  return jsFormatter.format(helpIntentHandlerTemplate)
+}
+
+module.exports.HelloWorldHandler = function(){
+  let helloWorldHandlerTemplate = 
+    `const HelloWorldIntentHandler = {
+      canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+          && handlerInput.requestEnvelope.request.intent.name === 'HelloWorldIntent';
+      },
+      handle(handlerInput) {
+        const speechText = 'Hello World!';
+    
+        return handlerInput.responseBuilder
+          .speak(speechText)
+          .withSimpleCard('Hello World', speechText)
+          .getResponse();
+      },
+    };`
+  return jsFormatter.format(helloWorldHandlerTemplate)
+}
+
+module.exports.CancelAndStopIntentHandler = function(lastWords){
+  let cancelAndStopIntentHandlerTemplate = 
+    `const CancelAndStopIntentHandler = {
+      canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+          && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent'
+            || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
+      },
+      handle(handlerInput) {
+        const speechText = 'Goodbye!';
+    
+        return handlerInput.responseBuilder
+          .speak(speechText)
+          .withSimpleCard('Hello World', speechText)
+          .getResponse();
+      },
+    };`
+  return jsFormatter.format(cancelAndStopIntentHandlerTemplate)
+}
+
+module.exports.SessionEndedRequestHandler = function(){
+  let endOfSessionHandlerTemplate = 
+    `const SessionEndedRequestHandler = {
+      canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
+      },
+      handle(handlerInput) {
+        console.log('Session ended :(');
+    
+        return handlerInput.responseBuilder.getResponse();
+      },
+    };`
+  return jsFormatter.format(endOfSessionHandlerTemplate)
+}
+
+module.exports.ErrorHandler = function(){
+  let errorHandlerTemplate = 
+    `const ErrorHandler = {
+      canHandle() {
+        return true;
+      },
+      handle(handlerInput, error) {
+        console.log('An error occured :(');
+    
+        return handlerInput.responseBuilder
+          .speak('Sorry, I cant understand the command. Please say again.')
+          .reprompt('Sorry, I cant understand the command. Please say again.')
+          .getResponse();
+      },
+    };`
+  return jsFormatter.format(errorHandlerTemplate)
+}
+
+module.exports.HandlerExportFooter = function(){
+  let handlerExportTemplate = 
+    `const skillBuilder = Alexa.SkillBuilders.custom();
+
+    exports.handler = skillBuilder
+      .addRequestHandlers(
+        LaunchRequestHandler,
+        HelloWorldIntentHandler,
+        HelpIntentHandler,
+        CancelAndStopIntentHandler,
+        SessionEndedRequestHandler
+      )
+      .addErrorHandlers(ErrorHandler)
+      .lambda();`
+  return jsFormatter.format(handlerExportTemplate)
+}
