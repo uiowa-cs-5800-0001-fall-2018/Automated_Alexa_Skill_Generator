@@ -17,15 +17,20 @@ block content
     </div>            
     div.mt-2(align='left')
       #blocklyDiv(style='height: 80vh; width: 80vw;', align='left')
-      button.btn.btn-danger.mt-2(onclick='showCode()', type='button') Show Code
-      form(method="POST" action='/saveworkspace')
-        input(type='text' id='xmlWorkspaceName' name='workspaceName')
-        input(type='hidden' id='xmlWorkspace' name='xml' value='')
-        button.btn.btn-danger.ml-2.mt-2(onclick='saveToXML()', type='submit') Save Workspace
-      //- TODO: Add function for generating skill.
-      form(method="POST" action="/generateSkill")
-        input(type="hidden" id="hidden" name="content" vlaue="<?php echo $row[1] ?>")
-        button.btn.btn-danger.mt-2(name="show-code" onclick='sendCodeToServer()' type='submit') Generate Skill
+      table
+        tr
+          td
+            //- TODO: Add function for generating skill.
+            form(method="POST" action="/generateSkill")
+                input(type="hidden" id="hidden" name="content" vlaue="<?php echo $row[1] ?>")
+                button.btn.btn-danger.mt-2(name="show-code" onclick='sendCodeToServer()' type='submit' style="margin-left:5px") Generate Skill  
+          td
+            button.btn.btn-danger.mt-2(onclick='showCode()', type='button' style='margin-left:6.5px') Show Code  
+          td
+            form(method="POST" action='/saveworkspace')
+                input(type='hidden' id='xmlWorkspace' name='xml' value='')
+                button.btn.btn-danger.ml-2.mt-2(onclick='saveToXML()', type='submit') Save Workspace  
+                input(type='text' id='xmlWorkspaceName' name='workspaceName' style='margin-left:5px; margin-top:10px')
     xml#toolbox(style='display: none')
       category(name='Logic')
         block(type='controls_if')
