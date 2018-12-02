@@ -209,7 +209,8 @@ router.post('/saveworkspace', function (req, res, next){
           email: req.session.email,
           workspace: text
         }
-        console.log('Right Here');
+        
+        
         Workspace.create(workspaceData, function (error, savedWorkspace) {
           if (error) {
             return next(error);
