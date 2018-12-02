@@ -15,7 +15,7 @@ router.get('/signup', function(req, res, next) {
   res.render('signup', { title: title, signed_in: req.session.signed_in , username: req.session.email});
 });
 
-router.get('/zip', function(req, res){
+router.post('/generateSkill', function(req, res){
   res.zip([
     {path: 'alexa-skill/index.js', name: 'index.js'},
     {path: 'alexa-skill/skill.json', name: 'skill.json'}
@@ -30,11 +30,6 @@ router.get('/signin', function(req, res, next) {
 router.get('/design', function(req, res, next){
   res.render('design', { title: title, signed_in: req.session.signed_in , username: req.session.email});
 });
-
-router.get('/generatedSkill', function(req, res, next){
-  res.render('generatedSkill', { title: title, signed_in: req.session.signed_in , username: req.session.email});
-});
-
 
 // GET for logout logout
 router.get('/logout', function (req, res, next) {
