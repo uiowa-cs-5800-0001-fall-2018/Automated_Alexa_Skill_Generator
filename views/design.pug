@@ -51,8 +51,8 @@ block content
       category(name='Alexa Skill Blocks')
         block(type='language_model_block')
         block(type='intent_block')
-        block(type='slot_block')
-        block(type='type_block')
+        //block(type='slot_block')
+        //block(type='type_block')
         block(type='api_request_block')
         block(type='parameter_block')
     xml#startBlocks(style='display: none')
@@ -72,17 +72,8 @@ block content
                                 block(type='lists_create_with')
                                     mutation(items=1)
                                     value(name='ADD0')
-                                        block(type='text_join')
-                            value(name='slots')
-                                block(type='lists_create_with')
-                                    mutation(items=1)
-                                    value(name='ADD0')
-                                        block(type='slot_block')
-                            value(name='types')
-                                block(type='lists_create_with')
-                                    mutation(items=1)
-                                    value(name='ADD0')
-                                        block(type='type_block')
+                                        block(type='text')
+                                            field(name='TEXT') SampleUtterance
                             value(name='lambda_function')
                                 block(type='api_request_block', inline='false', x='20', y='20')
                                     value(name='base_url')
@@ -91,17 +82,17 @@ block content
                                     value(name='parameters')
                                         block(type='lists_create_with')
                                             mutation(items=1)
-                                                value(name='ADD0')
-                                                    block(type='parameter_block')
+                                            value(name='ADD0')
+                                              block(type='parameter_block')
     script.
         Blockly.Blocks['language_model_block'] = {
             init: function () {
-                this.appendValueInput("custom_skill_name")
-                    .setCheck("String")
-                    .appendField("custom_skill_name")
+                this.appendDummyInput()
+                    .appendField("skill name:")
+                    .appendField(new Blockly.FieldTextInput("AlexaSkill"), "custom_skill_name");
                 this.appendValueInput("intents")
                     .setCheck("Array")
-                    .appendField("intents");
+                    .appendField("intents:");
                 this.setPreviousStatement(true, null);
                 //this.setNextStatement(true, null);
                 this.setColour(120);
@@ -111,26 +102,27 @@ block content
         };
         Blockly.Blocks['intent_block'] = {
             init: function () {
-                this.appendValueInput("name")
-                    .setCheck("String")
-                    .appendField("name");
-                this.appendValueInput("slots")
-                    .setCheck("Array")
-                    .appendField("slots (optional)");
+                this.appendDummyInput()
+                    .appendField("name:")
+                    .appendField(new Blockly.FieldTextInput("AlexaIntent"), "name");
+                //this.appendValueInput("slots")
+                    //.setCheck("Array")
+                    //.appendField("slots (optional)");
                 this.appendValueInput("samples")
                     .setCheck("Array")
-                    .appendField("samples");
-                this.appendValueInput("types")
-                    .setCheck("Array")
-                    .appendField("types");
+                    .appendField("phrases:");
+                //this.appendValueInput("types")
+                    //.setCheck("Array")
+                    //.appendField("types");
                 this.appendValueInput("lambda_function")
-                    .appendField("lambda_function");
+                    .appendField("response:");
                 this.setOutput(true, null);
                 this.setColour(225);
                 this.setTooltip("");
                 this.setHelpUrl("https://developer.amazon.com/docs/custom-skills/create-intents-utterances-and-slots.html");
             }
         };
+        /*
         Blockly.Blocks['slot_block'] = {
             init: function () {
                 this.appendValueInput("slot_name")
@@ -159,14 +151,15 @@ block content
                 this.setHelpUrl("https://developer.amazon.com/docs/custom-skills/create-intents-utterances-and-slots.html");
             }
         };
+        */
         Blockly.Blocks['api_request_block'] = {
             init: function () {
-                this.appendValueInput("base_url")
-                    .setCheck("String")
-                    .appendField("base_url");
+                this.appendDummyInput()
+                    .appendField("url:")
+                    .appendField(new Blockly.FieldTextInput("www.sample.com"), "base_url");
                 this.appendValueInput("parameters")
                     .setCheck("Array")
-                    .appendField("parameters");
+                    .appendField("parameters:");
                 this.setOutput(true, null);
                 this.setColour(120);
                 this.setTooltip("");
@@ -175,12 +168,12 @@ block content
         };
         Blockly.Blocks['parameter_block'] = {
             init: function () {
-                this.appendValueInput("key")
-                    .setCheck("String")
-                    .appendField("key");
-                this.appendValueInput("value")
-                    .setCheck("String")
-                    .appendField("value");
+                this.appendDummyInput()
+                    .appendField("key:")
+                    .appendField(new Blockly.FieldTextInput(""), "key");
+                this.appendDummyInput()
+                    .appendField("value:")
+                    .appendField(new Blockly.FieldTextInput(""), "value");
                 this.setOutput(true, null);
                 this.setColour(300);
                 this.setTooltip("");
@@ -193,20 +186,21 @@ block content
             Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
             workspace);
         Blockly.Python['language_model_block'] = function (block) {
-            var value_custom_skill_name = Blockly.Python.valueToCode(block, 'custom_skill_name', Blockly.Python.ORDER_ATOMIC);
+            var value_custom_skill_name = block.getFieldValue('custom_skill_name');
             var value_intents = Blockly.Python.valueToCode(block, 'intents', Blockly.Python.ORDER_ATOMIC);
-            var code = '{"interactionModel": { "languageModel": "invocationName": ' + value_custom_skill_name + ', ' + '"intents": ' + value_intents + '\n';
+            var code = '{"interactionModel": { "languageModel": "invocationName": "' + value_custom_skill_name + '", ' + '"intents": ' + value_intents + '\n';
             return code;
         };
         Blockly.Python['intent_block'] = function (block) {
-            var value_name = Blockly.Python.valueToCode(block, 'name', Blockly.Python.ORDER_ATOMIC);
+            var value_name = block.getFieldValue('name');
             var value_samples = Blockly.Python.valueToCode(block, 'samples', Blockly.Python.ORDER_ATOMIC);
-            var value_slots = Blockly.Python.valueToCode(block, 'slots', Blockly.Python.ORDER_ATOMIC);
-            var value_types = Blockly.Python.valueToCode(block, 'types', Blockly.Python.ORDER_ATOMIC);
+            //var value_slots = Blockly.Python.valueToCode(block, 'slots', Blockly.Python.ORDER_ATOMIC);
+            //var value_types = Blockly.Python.valueToCode(block, 'types', Blockly.Python.ORDER_ATOMIC);
             var value_lambda_function = Blockly.Python.valueToCode(block, 'lambda_function', Blockly.Python.ORDER_ATOMIC);
-            var code = '{"name": ' + value_name + ', "slots": ' + value_slots + ', "samples": ' + value_samples + ', "types": ' + value_types + ', lambda_function: ' + value_lambda_function + '}';
+            var code = '{"name": "' + value_name + '", "samples": ' + value_samples + ', "lambda_function": ' + value_lambda_function + '}';
             return [code];
         };
+        /*
         Blockly.Python['slot_block'] = function (block) {
             var value_slot_name = Blockly.Python.valueToCode(block, 'slot_name', Blockly.Python.ORDER_ATOMIC);
             var value_slot_type = Blockly.Python.valueToCode(block, 'slot_type', Blockly.Python.ORDER_ATOMIC);
@@ -219,16 +213,17 @@ block content
             var code = '{"name": ' + value_type_name + ', "values": ' + value_type_values + '}';
             return [code];
         };
+        */
         Blockly.Python['parameter_block'] = function (block) {
-            var value_key = Blockly.Python.valueToCode(block, 'key', Blockly.Python.ORDER_ATOMIC);
-            var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
-            var code = '{key: ' + value_key + ', value: ' + value_value + '}';
+            var value_key = block.getFieldValue('key');
+            var value_value = block.getFieldValue('value');
+            var code = '{"key": ' + value_key + ', "value": ' + value_value + '}';
             return [code];
         };
         Blockly.Python['api_request_block'] = function (block) {
-            var value_base_url = Blockly.Python.valueToCode(block, 'base_url', Blockly.Python.ORDER_ATOMIC);
+            var value_base_url = block.getFieldValue('base_url');
             var value_parameters = Blockly.Python.valueToCode(block, 'parameters', Blockly.Python.ORDER_ATOMIC);
-            var code = '{base_url: ' + value_base_url + ', parameters: ' + value_parameters + '}' + '\n';
+            var code = '{"base_url": ' + value_base_url + ', "parameters": ' + value_parameters + '}' + '\n';
             return [code];
         };
         function sendCodeToServer() {
