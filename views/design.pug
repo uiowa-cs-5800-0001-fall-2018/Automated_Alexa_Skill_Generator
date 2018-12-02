@@ -7,24 +7,35 @@ block content
     script(src="/blockly/python_compressed.js")
     script(src="/blockly/msg/js/en.js")
     if signed_in
-        ul(id='workspace_list') Workspaces
-            each workspace in workspaces1
-                li(class='workspaces' xmlCode=workspace.workspace)= workspace.name
-            else
-                li There are no workspaces
-    div.mt-2(align='center')
-      #blocklyDiv(style='height: 80vh; width: 100vw;', align='left')
-      button.btn.btn-danger.mt-2(onclick='showCode()', type='button') Show Code
-      form(method="POST" action='/saveworkspace')
-        input(type='text' id='xmlWorkspaceName' name='workspaceName')
-        input(type='hidden' id='xmlWorkspace' name='xml' value='')
-        button.btn.btn-danger.ml-2.mt-2(onclick='saveToXML()', type='submit') Save Workspace
-      //- TODO: Add function for generating skill.
-      form(method="POST" action="/generateSkill")
-        input(type="hidden" id="hidden" name="content" vlaue="<?php echo $row[1] ?>")
-        button.btn.btn-danger.mt-2(name="show-code" onclick='sendCodeToServer()' type='submit') Generate Skill
-      a(href='/help' target="_blank")
-        button.btn.btn-danger.mt-2(type='button') Help
+    <div class="float-right" style='height:81.4vh;width:18vw;overflow-y:scroll'>
+    h5(style='margin-top:10px' align='center') Workspaces
+    ul(id='workspace_list')
+    each workspace in workspaces1
+        p(class='text-primary' align='left' style='margin-left: 10px;text-decoration:underline' xmlCode=workspace.workspace)= workspace.name
+    else
+        p(class='text-secondary' align='center') There are no workspaces
+    </div>            
+    div.mt-2(align='left')
+      #blocklyDiv(style='height: 80vh; width: 80vw;', align='left')
+    div.mt-2(alighn='left')  
+      table
+        tr
+          td
+            //- TODO: Add function for generating skill.
+            form(method="POST" action="/generateSkill")
+                input(type="hidden" id="hidden" name="content" vlaue="<?php echo $row[1] ?>")
+                button.btn.btn-danger.mt-2(name="show-code" onclick='sendCodeToServer()' type='submit' style="margin-left:5px") Generate Skill  
+          td
+            button.btn.btn-danger.mt-2(onclick='showCode()', type='button' style='margin-left:6.5px') Show Code  
+          td
+            form(method="POST" action='/saveworkspace')
+                input(type='hidden' id='xmlWorkspace' name='xml' value='')
+                button.btn.btn-danger.ml-2.mt-2(onclick='saveToXML()', type='submit') Save Workspace  
+                input(type='text' id='xmlWorkspaceName' name='workspaceName' style='margin-left:5px; margin-top:10px')
+          div.mt-2(class='float-right' align='right' style='width:20vw')       
+            a(href='/help')
+            button.btn.btn-danger.mt-2(type='button' align='right' style='margin-right:10px') Help  
+ 
     xml#toolbox(style='display: none')
       category(name='Logic')
         block(type='controls_if')
@@ -284,9 +295,11 @@ block content
           document.getElementById('xmlWorkspaceName').value = document.getElementById('xmlWorkspaceName').trim();
         }
         document.getElementById('workspace_list').addEventListener("click",function(workspace_item){
-            var text = workspace_item.target.getAttribute('xmlcode');
-            var xml = Blockly.Xml.textToDom(text);
-            workspace.clear();
-            Blockly.Xml.domToWorkspace(xml, workspace);
+                var text = workspace_item.target.getAttribute('xmlcode');
+                var xml = Blockly.Xml.textToDom(text);
+            if (text != null){
+                workspace.clear();
+                Blockly.Xml.domToWorkspace(xml, workspace);
+            }    
             //Blockly.Xml.clearWorkspaceAndLoadFromXml(xml, Blockly.workspace);
         });
