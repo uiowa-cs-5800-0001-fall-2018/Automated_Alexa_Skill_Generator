@@ -7,7 +7,7 @@ module.exports.LibraryImportHandler = function(){
   return jsFormatter.format(importHandlerTemplate) + '\n\n'
 }
 
-module.exports.LaunchRequestHandler = function(launchRequestSpeech='I am an Alexa Skill'){
+module.exports.LaunchRequestHandler = function(launchRequestSpeech='LaunchRequest'){
   let launchRequestHandlerTemplate = 
     `const LaunchRequestHandler = {
       canHandle(handlerInput) {
