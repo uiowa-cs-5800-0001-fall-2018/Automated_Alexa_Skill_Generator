@@ -1,3 +1,1 @@
-{
-    "putJsonInFile" : "true"
-}
+{"interactionModel": { "languageModel": {"invocationName": "AlexaSkill", "intents": [{"name": "AlexaIntent", "samples": ['SampleUtterance'], "lambda_function": {"base_url": "www.sample.com", "parameter": {"key": "", "value": ""}}}]}}}
