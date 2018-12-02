@@ -7,13 +7,16 @@ block content
     script(src="/blockly/python_compressed.js")
     script(src="/blockly/msg/js/en.js")
     if signed_in
-        ul(id='workspace_list') Workspaces
-            each workspace in workspaces1
-                li(class='workspaces' xmlCode=workspace.workspace)= workspace.name
-            else
-                li There are no workspaces
-    div.mt-2(align='center')
-      #blocklyDiv(style='height: 80vh; width: 100vw;', align='left')
+    <div class="float-right" style='height:80vh;width:13vw;overflow-y:scroll'>
+    h5(style='float-center; margin-top:10px') Workspaces
+    ul(id='workspace_list')
+        each workspace in workspaces1
+            p(class='text-primary' xmlCode=workspace.workspace)= workspace.name
+        else
+            p There are no workspaces
+    </div>            
+    div.mt-2(align='left')
+      #blocklyDiv(style='height: 80vh; width: 80vw;', align='left')
       button.btn.btn-danger.mt-2(onclick='showCode()', type='button') Show Code
       form(method="POST" action='/saveworkspace')
         input(type='text' id='xmlWorkspaceName' name='workspaceName')
@@ -264,9 +267,11 @@ block content
           document.getElementById('xmlWorkspaceName').value = document.getElementById('xmlWorkspaceName').trim();
         }
         document.getElementById('workspace_list').addEventListener("click",function(workspace_item){
-            var text = workspace_item.target.getAttribute('xmlcode');
-            var xml = Blockly.Xml.textToDom(text);
-            workspace.clear();
-            Blockly.Xml.domToWorkspace(xml, workspace);
+                var text = workspace_item.target.getAttribute('xmlcode');
+                var xml = Blockly.Xml.textToDom(text);
+            if (text != null){
+                workspace.clear();
+                Blockly.Xml.domToWorkspace(xml, workspace);
+            }    
             //Blockly.Xml.clearWorkspaceAndLoadFromXml(xml, Blockly.workspace);
         });
