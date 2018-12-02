@@ -226,7 +226,7 @@ block content
             var value_base_url = block.getFieldValue('base_url');
             var value_key = block.getFieldValue('key');
             var value_value = block.getFieldValue('value');
-            var code = '{"base_url": ' + value_base_url + ', "parameter": {"key": ' + value_key + ', "value": ' + value_value + '}}' + '\n';
+            var code = '{"base_url": "' + value_base_url + '", "parameter": {"key": "' + value_key + '", "value": "' + value_value + '"}}' + '\n';
             return [code];
         };
         function sendCodeToServer() {
