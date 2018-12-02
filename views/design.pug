@@ -11,7 +11,8 @@ block content
     h5(style='margin-top:10px' align='center') Workspaces
     ul(id='workspace_list')
         each workspace in workspaces1
-            p(class='text-primary' align='left' style='margin-left: 10px;text-decoration:underline' xmlCode=workspace.workspace)= workspace.name
+            a( href='#' class='text-primary' align='left' style='margin-left: 10px;text-decoration:underline' xmlCode=workspace.workspace)=workspace.name
+            <br>
         else
             p(class='text-secondary' align='center') There are no workspaces
     </div>            
