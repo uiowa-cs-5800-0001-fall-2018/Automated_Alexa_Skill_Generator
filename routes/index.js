@@ -16,16 +16,16 @@ router.get('/signup', function(req, res, next) {
   res.render('signup', { title: title, signed_in: req.session.signed_in , username: req.session.email});
 });
 
+router.get('/help', function(req, res, next) {
+  res.render('help', { title: title, signed_in: req.session.signed_in , username: req.session.email});
+});
+
 router.post('/generateSkill', function(req, res){
   let lambdaFilePath = 'alexa-skill/index.js'
   let skillFilePath = 'alexa-skill/skill.json'
   let intents = []
-  let jsonRaw = req.body['content']
-  // let json = JSON.parse(jsonUnformatted)
-  let json = JSON.parse(JSON.stringify(jsonRaw));
   let lambdaCode = templater.generateLambdaFunction(intents)
   templater.writeToFile(lambdaFilePath, lambdaCode)
-  templater.writeToFile(skillFilePath, json)
 
   res.zip([
     {path: 'alexa-skill/index.js', name: 'index.js'},

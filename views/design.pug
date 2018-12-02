@@ -23,6 +23,8 @@ block content
       form(method="POST" action="/generateSkill")
         input(type="hidden" id="hidden" name="content" vlaue="<?php echo $row[1] ?>")
         button.btn.btn-danger.mt-2(name="show-code" onclick='sendCodeToServer()' type='submit') Generate Skill
+      a(href='/help')
+        button.btn.btn-danger.mt-2(type='button') Help
     xml#toolbox(style='display: none')
       category(name='Logic')
         block(type='controls_if')
