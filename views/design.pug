@@ -189,7 +189,7 @@ block content
         Blockly.Python['language_model_block'] = function (block) {
             var value_custom_skill_name = block.getFieldValue('custom_skill_name');
             var value_intents = Blockly.Python.valueToCode(block, 'intents', Blockly.Python.ORDER_ATOMIC);
-            var code = '{"interactionModel": { "languageModel": "invocationName": "' + value_custom_skill_name + '", ' + '"intents": ' + value_intents + '\n';
+            var code = '{"interactionModel": { "languageModel": {"invocationName": "' + value_custom_skill_name + '", ' + '"intents": ' + value_intents + '}}}\n';
             return code;
         };
         Blockly.Python['intent_block'] = function (block) {
