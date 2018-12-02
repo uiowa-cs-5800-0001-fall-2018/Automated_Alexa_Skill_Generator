@@ -182,7 +182,12 @@ router.get('/profile', function (req, res, next) {
           req.session.name = user.name;
           req.session.username = user.username;
           req.session.dateCreated = user.created_at;
-          res.render('profile', { title: title, signed_in: req.session.signed_in, email: req.session.email, name: req.session.name, username: req.session.username, dateCreated: req.session.dateCreated});
+          var workspaceCount = 0;
+          Workspace.count({username: req.session.username}, function(err, count){
+            workspaceCount = count;
+            res.render('profile', { title: title, signed_in: req.session.signed_in, email: req.session.email, name: req.session.name, username: req.session.username, dateCreated: req.session.dateCreated, workspaceCount: workspaceCount});
+          });
+          
         }
       }
     });
