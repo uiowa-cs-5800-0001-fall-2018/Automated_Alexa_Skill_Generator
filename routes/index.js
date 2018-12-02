@@ -192,4 +192,36 @@ router.get('/users', function(req, res, next) {
 router.get('/users/cool/', function(req, res, next) {
   res.send('You\'re so cool');
 });
+
+
+router.post('/saveworkspace', function (req, res, next){
+  var text = req.body.xml;
+  var workspaceName = req.body.workspaceName;
+  console.log(text);
+  console.log(workspaceName);
+      if (!req.session.signed_in) {
+        var err = new Error('Please log in to save a workspace!');
+        err.status = 401;
+        return next(err);
+      } 
+      else {  
+        var workspaceData = {
+          name: workspaceName,
+          username: req.session.username,
+          email: req.session.email,
+          workspace: text
+        }
+        console.log('Right Here');
+        Workspace.create(workspaceData, function (error, savedWorkspace) {
+          if (error) {
+            console.log('error')
+            return next(error);
+          } 
+          else {
+            console.log("im right here");
+          }
+        });
+      }
+  res.redirect('/design');
+});
 module.exports = router;
