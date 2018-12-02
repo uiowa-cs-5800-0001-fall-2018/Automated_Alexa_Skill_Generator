@@ -17,8 +17,8 @@ router.get('/signup', function(req, res, next) {
 
 router.get('/zip', function(req, res){
   res.zip([
-    {path: 'data/index.js', name: 'index.js'},
-    {path: 'data/skill.json', name: 'skill.json'}
+    {path: 'alexa-skill/index.js', name: 'index.js'},
+    {path: 'alexa-skill/skill.json', name: 'skill.json'}
   ])
 });
 
