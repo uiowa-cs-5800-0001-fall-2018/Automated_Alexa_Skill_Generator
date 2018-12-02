@@ -54,6 +54,7 @@ block content
         //block(type='slot_block')
         //block(type='type_block')
         block(type='api_request_block')
+        block(type='bongo_block')
         //block(type='parameter_block')
     xml#startBlocks(style='display: none')
         block(type='language_model_block', inline='false', x='20', y='20')
@@ -75,11 +76,7 @@ block content
                                         block(type='text')
                                             field(name='TEXT') SampleUtterance
                             value(name='lambda_function')
-                                block(type='api_request_block', inline='false', x='20', y='20')
-                                    value(name='base_url')
-                                        block(type='text')
-                                            field(name='TEXT') www.sampleapibaseurl.com
-                                    value(name='parameters')
+                                block(type='bongo_block', inline='false', x='20', y='20')
     script.
         Blockly.Blocks['language_model_block'] = {
             init: function () {
@@ -165,6 +162,23 @@ block content
                 this.setHelpUrl("");
             }
         };
+        Blockly.Blocks['bongo_block'] = {
+            init: function () {
+                this.appendDummyInput()
+                    .appendField("url:")
+                    .appendField(new Blockly.FieldTextInput("http://api.ebongo.org/stop?"), "base_url");
+                this.appendDummyInput()
+                    .appendField("parameter key:")
+                    .appendField("stopID");
+                this.appendDummyInput()
+                    .appendField("parameter value:")
+                    .appendField(new Blockly.FieldTextInput(""), "value");
+                this.setOutput(true, null);
+                this.setColour(120);
+                this.setTooltip("");
+                this.setHelpUrl("");
+            }
+        };
         /*
         Blockly.Blocks['parameter_block'] = {
             init: function () {
@@ -227,6 +241,12 @@ block content
             var value_key = block.getFieldValue('key');
             var value_value = block.getFieldValue('value');
             var code = '{"base_url": "' + value_base_url + '", "parameter": {"key": "' + value_key + '", "value": "' + value_value + '"}}';
+            return [code];
+        };
+        Blockly.Python['bongo_block'] = function (block) {
+            var value_base_url = block.getFieldValue('base_url');
+            var value_value = block.getFieldValue('value');
+            var code = '{"base_url": "' + value_base_url + '", "parameter": {"key": "stopID", "value": "' + value_value + '"}}';
             return [code];
         };
         function sendCodeToServer() {
