@@ -16,6 +16,12 @@ router.get('/signup', function(req, res, next) {
 });
 
 router.post('/generateSkill', function(req, res){
+  let lambdaFilePath = 'alexa-skill/index.js'
+  let skillFilePath = 'alexa-skill/skill.json'
+  let intents = []
+  let lambdaCode = templater.generateLambdaFunction(intents)
+  templater.writeToFile(lambdaFilePath, lambdaCode)
+
   res.zip([
     {path: 'alexa-skill/index.js', name: 'index.js'},
     {path: 'alexa-skill/skill.json', name: 'skill.json'}
@@ -44,14 +50,6 @@ router.get('/logout', function (req, res, next) {
     });
   }
 });
-
-// (POST) Get blockly data from a workspace
-router.post('/blocklyData', function (req, res) {
-  let skillJSON = JSON.stringify(req.body)
-  let lambdaCode = templater.formatCode()
-  res.set({"Content-Disposition":"attachment; filename=\"lambdacode.js\"", "Location": "/design"});
-  res.send(lambdaCode);
-  });
 
 // POST authenticate for sign in behavior
 router.post('/authenticate', function (req, res, next) {
