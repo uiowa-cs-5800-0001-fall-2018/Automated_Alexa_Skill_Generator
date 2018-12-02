@@ -3,6 +3,7 @@ var router = express.Router();
 var User = require('../models/user');
 var templater = require('../templater')
 var title = 'Alexa Automated'
+var fs = require('fs')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -43,10 +44,10 @@ router.get('/logout', function (req, res, next) {
 
 // (POST) Get blockly data from a workspace
 router.post('/blocklyData', function (req, res) {
-  // formatedCode = templater.format_code(req.body)
   let skillJSON = JSON.stringify(req.body)
   let lambdaCode = templater.formatCode()
-  res.render('generatedSkill', {skillJSON: skillJSON, lambdaCode: lambdaCode});
+  res.set({"Content-Disposition":"attachment; filename=\"lambdacode.js\"", "Location": "/design"});
+  res.send(lambdaCode);
   });
 
 // POST authenticate for sign in behavior
