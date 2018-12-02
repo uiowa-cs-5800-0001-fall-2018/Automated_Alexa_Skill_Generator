@@ -16,6 +16,10 @@ router.get('/signup', function(req, res, next) {
   res.render('signup', { title: title, signed_in: req.session.signed_in , username: req.session.email});
 });
 
+router.get('/help', function(req, res, next) {
+  res.render('help', { title: title, signed_in: req.session.signed_in , username: req.session.email});
+});
+
 router.post('/generateSkill', function(req, res){
   let lambdaFilePath = 'alexa-skill/index.js'
   let skillFilePath = 'alexa-skill/skill.json'
@@ -197,8 +201,6 @@ router.get('/users/cool/', function(req, res, next) {
 router.post('/saveworkspace', function (req, res, next){
   var text = req.body.xml;
   var workspaceName = req.body.workspaceName;
-  console.log(text);
-  console.log(workspaceName);
       if (!req.session.signed_in) {
         var err = new Error('Please log in to save a workspace!');
         err.status = 401;
@@ -211,17 +213,15 @@ router.post('/saveworkspace', function (req, res, next){
           email: req.session.email,
           workspace: text
         }
-        console.log('Right Here');
         Workspace.create(workspaceData, function (error, savedWorkspace) {
           if (error) {
-            console.log('error')
             return next(error);
           } 
           else {
-            console.log("im right here");
+            res.redirect('back');
           }
         });
       }
-  res.redirect('/design');
+  //res.redirect('/design');
 });
 module.exports = router;

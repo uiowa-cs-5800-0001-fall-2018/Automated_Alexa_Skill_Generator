@@ -1,6 +1,16 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:50px')
+    h1(style='margin-bottom: 20px')
+    .card-deck
+      .card.bg-danger
+        .card-body.text-center
+          h2.mb-2
+            i.fas.fa-exclamation-triangle.mb-2(style='margin-right: 8px')
+            | ERROR!
+          h3.card-text= message
+
+  //- h1= message
+  //- h2= error.status
+  //- pre #{error.stack}
