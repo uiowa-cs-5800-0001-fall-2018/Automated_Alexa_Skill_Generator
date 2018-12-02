@@ -20,8 +20,12 @@ router.post('/generateSkill', function(req, res){
   let lambdaFilePath = 'alexa-skill/index.js'
   let skillFilePath = 'alexa-skill/skill.json'
   let intents = []
+  let jsonRaw = req.body['content']
+  // let json = JSON.parse(jsonUnformatted)
+  let json = JSON.parse(JSON.stringify(jsonRaw));
   let lambdaCode = templater.generateLambdaFunction(intents)
   templater.writeToFile(lambdaFilePath, lambdaCode)
+  templater.writeToFile(skillFilePath, json)
 
   res.zip([
     {path: 'alexa-skill/index.js', name: 'index.js'},
