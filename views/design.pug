@@ -6,10 +6,19 @@ block content
     script(src="/blockly/blocks_compressed.js")
     script(src="/blockly/javascript_compressed.js")
     script(src="/blockly/msg/js/en.js")
+    if signed_in
+        ul(id='workspace_list') Workspaces
+            each workspace in workspaces1
+                li(class='workspaces' xmlCode=workspace.workspace)= workspace.name
+            else
+                li There are no workspaces
     div.mt-2(align='center')
       #blocklyDiv(style='height: 80vh; width: 100vw;', align='left')
       button.btn.btn-danger.mt-2(onclick='showCode()', type='button') Show Code
-      button.btn.btn-danger.ml-2.mt-2(onclick='saveToXML()', type='button') Save Workspace
+      form(method="POST" action='/saveworkspace')
+        input(type='text' id='xmlWorkspaceName' name='workspaceName')
+        input(type='hidden' id='xmlWorkspace' name='xml' value='')
+        button.btn.btn-danger.ml-2.mt-2(onclick='saveToXML()', type='submit') Save Workspace
       //- TODO: Add function for generating skill.
       form(method="POST" action="/generateSkill")
         input(type="hidden" id="hidden" name="content" vlaue="<?php echo $row[1] ?>")
@@ -251,4 +260,13 @@ block content
         function saveToXML(){
           var xml = Blockly.Xml.workspaceToDom(workspace);
           var xml_text = Blockly.Xml.domToText(xml);
+          document.getElementById('xmlWorkspace').value = xml_text;
+          document.getElementById('xmlWorkspaceName').value = document.getElementById('xmlWorkspaceName').trim();
         }
+        document.getElementById('workspace_list').addEventListener("click",function(workspace_item){
+            var text = workspace_item.target.getAttribute('xmlcode');
+            var xml = Blockly.Xml.textToDom(text);
+            workspace.clear();
+            Blockly.Xml.domToWorkspace(xml, workspace);
+            //Blockly.Xml.clearWorkspaceAndLoadFromXml(xml, Blockly.workspace);
+        });

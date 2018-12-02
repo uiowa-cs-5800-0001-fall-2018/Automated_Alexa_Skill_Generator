@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
-var templater = require('../templater')
-var zip = require('express-zip')
-var title = 'Alexa Automated'
-var fs = require('fs')
+var Workspace = require('../models/workspace');
+var templater = require('../templater');
+var zip = require('express-zip');
+var title = 'Alexa Automated';
+var fs = require('fs');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -34,7 +35,29 @@ router.get('/signin', function(req, res, next) {
 });
 
 router.get('/design', function(req, res, next){
-  res.render('design', { title: title, signed_in: req.session.signed_in , username: req.session.email});
+    //var workspaces=null;
+    var usersWorkspaces=null;
+    console.log('Username: '+req.session.username);
+    var query = Workspace.find({username: 'collin124'});
+    if(req.session.signed_in){
+      //workspaces = Workspace.find({username: req.session.username});
+      Workspace.find({username: req.session.username}).exec(function(error, workspaces){
+        if(error){
+          return next(error);
+        }
+        else{
+          console.log("Workspaces: "+workspaces);
+          usersWorkspaces = workspaces;
+          //, workspaces1: workspaces
+        }
+        if(usersWorkspaces!=null){
+          return res.render('design', { workspaces1: workspaces,title: title, signed_in: req.session.signed_in , username: req.session.email});
+        }
+      });
+    }
+    else{
+      res.render('design', {title: title, signed_in: req.session.signed_in , username: req.session.email});
+    }
 });
 
 // GET for logout logout
