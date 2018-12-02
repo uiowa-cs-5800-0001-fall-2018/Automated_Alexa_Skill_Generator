@@ -54,7 +54,7 @@ block content
         //block(type='slot_block')
         //block(type='type_block')
         block(type='api_request_block')
-        block(type='parameter_block')
+        //block(type='parameter_block')
     xml#startBlocks(style='display: none')
         block(type='language_model_block', inline='false', x='20', y='20')
             value(name='custom_skill_name')
@@ -80,10 +80,6 @@ block content
                                         block(type='text')
                                             field(name='TEXT') www.sampleapibaseurl.com
                                     value(name='parameters')
-                                        block(type='lists_create_with')
-                                            mutation(items=1)
-                                            value(name='ADD0')
-                                              block(type='parameter_block')
     script.
         Blockly.Blocks['language_model_block'] = {
             init: function () {
@@ -157,15 +153,19 @@ block content
                 this.appendDummyInput()
                     .appendField("url:")
                     .appendField(new Blockly.FieldTextInput("www.sample.com"), "base_url");
-                this.appendValueInput("parameters")
-                    .setCheck("Array")
-                    .appendField("parameters:");
+                this.appendDummyInput()
+                    .appendField("parameter key:")
+                    .appendField(new Blockly.FieldTextInput(""), "key");
+                this.appendDummyInput()
+                    .appendField("parameter value:")
+                    .appendField(new Blockly.FieldTextInput(""), "value");
                 this.setOutput(true, null);
                 this.setColour(120);
                 this.setTooltip("");
                 this.setHelpUrl("");
             }
         };
+        /*
         Blockly.Blocks['parameter_block'] = {
             init: function () {
                 this.appendDummyInput()
@@ -180,6 +180,7 @@ block content
                 this.setHelpUrl("");
             }
         };
+        */
         var workspace = Blockly.inject('blocklyDiv',
             {media: '/blockly/media/',
             toolbox: document.getElementById('toolbox')});
@@ -213,17 +214,19 @@ block content
             var code = '{"name": ' + value_type_name + ', "values": ' + value_type_values + '}';
             return [code];
         };
-        */
+
         Blockly.Python['parameter_block'] = function (block) {
             var value_key = block.getFieldValue('key');
             var value_value = block.getFieldValue('value');
             var code = '{"key": ' + value_key + ', "value": ' + value_value + '}';
             return [code];
         };
+        */
         Blockly.Python['api_request_block'] = function (block) {
             var value_base_url = block.getFieldValue('base_url');
-            var value_parameters = Blockly.Python.valueToCode(block, 'parameters', Blockly.Python.ORDER_ATOMIC);
-            var code = '{"base_url": ' + value_base_url + ', "parameters": ' + value_parameters + '}' + '\n';
+            var value_key = block.getFieldValue('key');
+            var value_value = block.getFieldValue('value');
+            var code = '{"base_url": ' + value_base_url + ', "parameter": {"key": ' + value_key + ', "value": ' + value_value + '}}' + '\n';
             return [code];
         };
         function sendCodeToServer() {
