@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 var templater = require('../templater')
+var zip = require('express-zip')
 var title = 'Alexa Automated'
 var fs = require('fs')
 
@@ -12,6 +13,13 @@ router.get('/', function(req, res, next) {
 
 router.get('/signup', function(req, res, next) {
   res.render('signup', { title: title, signed_in: req.session.signed_in , username: req.session.email});
+});
+
+router.get('/zip', function(req, res){
+  res.zip([
+    {path: 'data/index.js', name: 'index.js'},
+    {path: 'data/skill.json', name: 'skill.json'}
+  ])
 });
 
 
