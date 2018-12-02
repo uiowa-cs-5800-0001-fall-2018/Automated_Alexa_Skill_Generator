@@ -10,10 +10,10 @@ block content
     <div class="float-right" style='height:81.4vh;width:18vw;overflow-y:scroll'>
     h5(style='margin-top:10px' align='center') Workspaces
     ul(id='workspace_list')
-    each workspace in workspaces1
-        p(class='text-primary' align='left' style='margin-left: 10px;text-decoration:underline' xmlCode=workspace.workspace)= workspace.name
-    else
-        p(class='text-secondary' align='center') There are no workspaces
+        each workspace in workspaces1
+            p(class='text-primary' align='left' style='margin-left: 10px;text-decoration:underline' xmlCode=workspace.workspace)= workspace.name
+        else
+            p(class='text-secondary' align='center') There are no workspaces
     </div>            
     div.mt-2(align='left')
       #blocklyDiv(style='height: 80vh; width: 80vw;', align='left')
