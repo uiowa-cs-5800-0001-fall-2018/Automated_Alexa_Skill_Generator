@@ -16,16 +16,17 @@ router.get('/signup', function(req, res, next) {
   res.render('signup', { title: title, signed_in: req.session.signed_in , username: req.session.email});
 });
 
-router.get('/help', function(req, res, next) {
-  res.render('help', { title: title, signed_in: req.session.signed_in , username: req.session.email});
-});
-
 router.post('/generateSkill', function(req, res){
   let lambdaFilePath = 'alexa-skill/index.js'
   let skillFilePath = 'alexa-skill/skill.json'
   let intents = []
+  let jsonRaw = req.body['content']
+  // let json = JSON.parse(jsonUnformatted)
+  let json = JSON.parse(JSON.stringify(jsonRaw));
+  intents = [{"base_url": "http://api.ebongo.org/stop?", "parameter": {"key": "stopID", "value": "7271"}}]
   let lambdaCode = templater.generateLambdaFunction(intents)
   templater.writeToFile(lambdaFilePath, lambdaCode)
+  templater.writeToFile(skillFilePath, json)
 
   res.zip([
     {path: 'alexa-skill/index.js', name: 'index.js'},
@@ -213,29 +214,15 @@ router.post('/saveworkspace', function (req, res, next){
           email: req.session.email,
           workspace: text
         }
-        Workspace.count({name:workspaceName, username: req.session.username}, function(err, count){
-          if(count > 0){
-            Workspace.update({name: workspaceName, username: req.session.username}, workspaceData,function(error, raw){
-              if(error){
-                return next(error);
-              }
-              else{
-                res.redirect('back');
-              }
-            });
-          }
-          else{
-            Workspace.create(workspaceData, function (error, savedWorkspace) {
-              if (error) {
-                return next(error);
-              } 
-              else {
-                res.redirect('back');
-              }
-            });
+        console.log('Right Here');
+        Workspace.create(workspaceData, function (error, savedWorkspace) {
+          if (error) {
+            return next(error);
+          } 
+          else {
           }
         });
       }
-  //res.redirect('/design');
+  res.redirect('/design');
 });
 module.exports = router;
