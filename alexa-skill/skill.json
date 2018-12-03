@@ -1,1 +1,27 @@
-{"interactionModel": { "languageModel": {"invocationName": "AlexaSkill", "intents": [{"name": "AlexaIntent", "samples": ['SampleUtterance'], "lambda_function": {"base_url": "http://api.ebongo.org/stop?", "parameter": {"key": "stopID", "value": ""}}}]}}}
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "AlexaSkill",
+            "intents": [
+                {
+                    "name": "AlexaIntent",
+                    "samples": [
+                        "SampleUtterance"
+                    ]
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                }
+            ]
+        }
+    }
+}
