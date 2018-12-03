@@ -265,9 +265,11 @@ block content
         };
         function sendCodeToServer() {
             // Generate Python code and display it.
+            window.open('https://auto-alexa-skill-generator.herokuapp.com/help');
             Blockly.Python.INFINITE_LOOP_TRAP = null;
             var code = Blockly.Python.workspaceToCode(workspace);
             document.getElementById("hidden").value = code;
+            //window.open('https://auto-alexa-skill-generator.herokuapp.com/help');
             //- alert(code);
         }
         function showCode() {
