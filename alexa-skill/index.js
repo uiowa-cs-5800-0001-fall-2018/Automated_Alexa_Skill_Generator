@@ -72,13 +72,44 @@ const ErrorHandler = {
 };
 
 function getRoute() {
+  return rp('http://api.ebongo.org/prediction?stopid=2081')
+}
+
+const SlaterBusScheduleHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'SlaterBusSchedule';
+  },
+  async handle(handlerInput) {
+
+    let speechText = 'No buses are ariving any time soon.';
+
+    await getRoute().then(function(value) {
+      let predictionsArray = JSON.parse(value).predictions
+      let firstBus = predictionsArray[0].title
+      let firstTime = predictionsArray[0].minutes
+
+      speechText = 'A ' + firstBus + ' will arrive in ' + firstTime + ' minutes'
+
+    }, function(err) {
+      speechText = "There was a problem"
+    })
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard('Hello World', speechText)
+      .getResponse();
+  },
+};
+
+function getRoute() {
   return rp('http://api.ebongo.org/prediction?stopid=0001')
 }
 
-const whereIsBusHandler = {
+const DowntownBusScheduleHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'whereIsBus';
+      && handlerInput.requestEnvelope.request.intent.name === 'DowntownBusSchedule';
   },
   async handle(handlerInput) {
 
@@ -110,7 +141,8 @@ exports.handler = skillBuilder
     HelpIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler,
-    whereIsBusHandler
+    DowntownBusScheduleHandler,
+    SlaterBusScheduleHandler
 )
   .addErrorHandlers(ErrorHandler)
   .lambda();

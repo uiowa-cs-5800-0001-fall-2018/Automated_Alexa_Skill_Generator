@@ -4,9 +4,15 @@
             "invocationName": "bongo",
             "intents": [
                 {
-                    "name": "whereIsBus",
+                    "name": "SlaterBusSchedule",
                     "samples": [
-                        "where is my bus"
+                        "when is a bus coming to slater"
+                    ]
+                },
+                {
+                    "name": "DowntownBusSchedule",
+                    "samples": [
+                        "when is a bus coming downtown"
                     ]
                 },
                 {

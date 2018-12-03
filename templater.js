@@ -167,14 +167,9 @@ module.exports.createCustomIntents = function(customIntents){
     var api_request = customIntents[i]["lambda_function"]
     var customHandlers = ',' + '\n' + intentName + 'Handler' + customHandlers
     response = response + callApi(intentName, api_request)
+  }
   return response + this.HandlerExportFooter(customHandlers)
 
-  }
-  // customIntents.intents.forEach(function (arrayItem) {
-  //   var name = arrayItem.name
-  //   var lambda_function = arrayItem.lambda_function
-  //   console.log(name)
-  // });
 
   function callApi(intentName, api_request){
     var baseURL = api_request["base_url"]
