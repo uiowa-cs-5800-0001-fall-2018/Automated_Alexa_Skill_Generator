@@ -25,21 +25,16 @@ router.post('/generateSkill', function(req, res){
   let skillFilePath = 'alexa-skill/skill.json'
   let intents = []
   let jsonRaw = req.body['content']
-  // let json = JSON.parse(jsonUnformatted)
   let jsonObject = JSON.parse(jsonRaw.replace(/'/g, '"'));
-  let customIntents = jsonObject.interactionModel.languageModel.intents.find(f=>f.lambda_function)
-  customIntents = JSON.stringify(customIntents)
-  console.log(customIntents)
+  let customIntents = jsonObject.interactionModel.languageModel.intents
+  let lambdaCode = templater.generateLambdaFunction(customIntents)
   jsonObject.interactionModel.languageModel.intents.forEach(function (arrayItem) {
     delete arrayItem.lambda_function
-    console.log(arrayItem);
   });
   jsonObject.interactionModel.languageModel.intents.push({"name": "AMAZON.CancelIntent", "samples": []})
   jsonObject.interactionModel.languageModel.intents.push({"name": "AMAZON.HelpIntent", "samples": []})
   jsonObject.interactionModel.languageModel.intents.push({"name":"AMAZON.StopIntent", "samples": []})
   let jsonString = JSON.stringify(jsonObject, null, 4)
-  intents = [{"base_url": "http://api.ebongo.org/stop?", "parameter": {"key": "stopID", "value": "7271"}}]
-  let lambdaCode = templater.generateLambdaFunction(intents)
   templater.writeToFile(lambdaFilePath, lambdaCode)
   templater.writeToFile(skillFilePath, jsonString)
 

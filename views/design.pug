@@ -260,7 +260,7 @@ block content
         Blockly.Python['bongo_block'] = function (block) {
             var value_base_url = block.getFieldValue('base_url');
             var value_value = block.getFieldValue('value');
-            var code = '{"base_url": "' + value_base_url + '", "parameter": {"key": "stopID", "value": "' + value_value + '"}}';
+            var code = '{"base_url": "' + value_base_url + '", "parameter": {"key": "stopid", "value": "' + value_value + '"}}';
             return [code];
         };
         function sendCodeToServer() {

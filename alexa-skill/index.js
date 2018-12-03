@@ -72,13 +72,13 @@ const ErrorHandler = {
 };
 
 function getRoute() {
-  return rp('http://api.ebongo.org/prediction?stopid=0001')
+  return rp('http://api.ebongo.org/stop?stopid=0001')
 }
 
-const getBusRouteIntentHandler = {
+const GetBusIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'getBusRouteIntent';
+      && handlerInput.requestEnvelope.request.intent.name === 'GetBusIntent';
   },
   async handle(handlerInput) {
 
@@ -107,10 +107,10 @@ const skillBuilder = Alexa.SkillBuilders.custom();
 exports.handler = skillBuilder
   .addRequestHandlers(
     LaunchRequestHandler,
-    getBusRouteIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
-    SessionEndedRequestHandler
+    SessionEndedRequestHandler,
+    GetBusIntentHandler
 )
   .addErrorHandlers(ErrorHandler)
   .lambda();

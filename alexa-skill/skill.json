@@ -1,12 +1,12 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "AlexaSkill",
+            "invocationName": "bongo",
             "intents": [
                 {
-                    "name": "AlexaIntent",
+                    "name": "GetBusIntent",
                     "samples": [
-                        "SampleUtterance"
+                        "when is bus coming"
                     ]
                 },
                 {

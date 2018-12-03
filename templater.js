@@ -117,17 +117,17 @@ module.exports.ErrorHandler = function(){
   return jsFormatter.format(errorHandlerTemplate) + '\n\n'
 }
 
-module.exports.HandlerExportFooter = function(){
+module.exports.HandlerExportFooter = function(customHandlers){
+
   let handlerExportTemplate = 
     `const skillBuilder = Alexa.SkillBuilders.custom();
 
     exports.handler = skillBuilder
       .addRequestHandlers(
         LaunchRequestHandler,
-        getBusRouteIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
-        SessionEndedRequestHandler
+        SessionEndedRequestHandler${customHandlers}
       )
       .addErrorHandlers(ErrorHandler)
       .lambda();`
@@ -138,8 +138,7 @@ module.exports.generateLambdaFunction = function(intents){
   let lambdaFunction = 
     (this.getRequiredLibraries() + 
     this.getRequiredIntents() +
-    this.createCustomIntents(intents) +
-    this.HandlerExportFooter())
+    this.createCustomIntents(intents))
   return lambdaFunction
 }
 
@@ -160,39 +159,61 @@ module.exports.getRequiredIntents = function(){
   return (this.LaunchRequestHandler() + this.HelpIntentHandler() + this.CancelAndStopIntentHandler() + this.SessionEndedRequestHandler() + this.ErrorHandler())
 }
 
-module.exports.createCustomIntents = function(){
-  intentName = "getBusRoute" + "Intent"
-  let customIntent = 
-    `function getRoute() {
-      return rp('http://api.ebongo.org/prediction?stopid=0001')
-    }
-    
-    const ${intentName}Handler = {
-      canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-          && handlerInput.requestEnvelope.request.intent.name === '${intentName}';
-      },
-      async handle(handlerInput) {
+module.exports.createCustomIntents = function(customIntents){
+  var response = ``
+  var customHandlers = ``
+  for(i=0; i<customIntents.length; i++){
+    var intentName = customIntents[i]["name"]
+    var api_request = customIntents[i]["lambda_function"]
+    var customHandlers = ',' + '\n' + intentName + 'Handler' + customHandlers
+    response = response + callApi(intentName, api_request)
+  return response + this.HandlerExportFooter(customHandlers)
 
-        let speechText = 'I dont have any bus information';
+  }
+  // customIntents.intents.forEach(function (arrayItem) {
+  //   var name = arrayItem.name
+  //   var lambda_function = arrayItem.lambda_function
+  //   console.log(name)
+  // });
 
-        await getRoute().then(function(value){
-          let predictionsArray = JSON.parse(value).predictions
-          let firstBus = predictionsArray[0].title
-          let firstTime = predictionsArray[0].minutes
+  function callApi(intentName, api_request){
+    var baseURL = api_request["base_url"]
+    var key = api_request["parameter"].key
+    var value = api_request["parameter"].value
+    console.log("Key ==== ", key)
 
-          speechText = 'A ' + firstBus + ' will arrive in ' + firstTime + ' minutes'
+    let customIntent = 
+      `function getRoute() {
+        return rp('${baseURL}${key}=${value}')
+      }
+      
+      const ${intentName}Handler = {
+        canHandle(handlerInput) {
+          return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+            && handlerInput.requestEnvelope.request.intent.name === '${intentName}';
+        },
+        async handle(handlerInput) {
 
-        }, function(err){
-            speechText = "There was a problem"
-        })
-    
-        return handlerInput.responseBuilder
-          .speak(speechText)
-          .withSimpleCard('Hello World', speechText)
-          .getResponse();
-      },
-    };`
+          let speechText = 'No buses are ariving any time soon.';
 
-    return jsFormatter.format(customIntent) + '\n\n'
+          await getRoute().then(function(value){
+            let predictionsArray = JSON.parse(value).predictions
+            let firstBus = predictionsArray[0].title
+            let firstTime = predictionsArray[0].minutes
+
+            speechText = 'A ' + firstBus + ' will arrive in ' + firstTime + ' minutes'
+
+          }, function(err){
+              speechText = "There was a problem"
+          })
+      
+          return handlerInput.responseBuilder
+            .speak(speechText)
+            .withSimpleCard('Hello World', speechText)
+            .getResponse();
+        },
+      };`
+
+      return jsFormatter.format(customIntent) + '\n\n'
+  }
   }
