@@ -75,10 +75,10 @@ function getRoute() {
   return rp('http://api.ebongo.org/prediction?stopid=0001')
 }
 
-const GetMyBusIntentHandler = {
+const whereIsBusHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'GetMyBusIntent';
+      && handlerInput.requestEnvelope.request.intent.name === 'whereIsBus';
   },
   async handle(handlerInput) {
 
@@ -110,7 +110,7 @@ exports.handler = skillBuilder
     HelpIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler,
-    GetMyBusIntentHandler
+    whereIsBusHandler
 )
   .addErrorHandlers(ErrorHandler)
   .lambda();

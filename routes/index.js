@@ -26,6 +26,7 @@ router.post('/generateSkill', function(req, res){
   let intents = []
   let jsonRaw = req.body['content']
   let jsonObject = JSON.parse(jsonRaw.replace(/'/g, '"'));
+  jsonObject.interactionModel.languageModel.invocationName = jsonObject.interactionModel.languageModel.invocationName.toLowerCase()
   let customIntents = jsonObject.interactionModel.languageModel.intents
   let lambdaCode = templater.generateLambdaFunction(customIntents)
   jsonObject.interactionModel.languageModel.intents.forEach(function (arrayItem) {
