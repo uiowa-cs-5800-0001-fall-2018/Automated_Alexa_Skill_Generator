@@ -14,3 +14,7 @@ the command: ```nodemon start```
 
 ## Application URL
 Our application is hosted through Heroku at the URL: https://auto-alexa-skill-generator.herokuapp.com/ 
+
+
+## Original Repo
+https://github.com/cedmnds/Automated_Alexa_Skill_Generator
