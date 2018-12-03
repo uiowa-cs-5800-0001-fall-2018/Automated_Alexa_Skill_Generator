@@ -182,11 +182,21 @@ router.get('/profile', function (req, res, next) {
           req.session.name = user.name;
           req.session.username = user.username;
           req.session.dateCreated = user.created_at;
+          Workspace.find({username: req.session.username}).exec(function(error, workspaces){
+            if(error){
+              return next(error);
+            }
+            else{
+              console.log("Workspaces: "+workspaces);
+              usersWorkspaces = workspaces;
+              //, workspaces1: workspaces
+            }
           var workspaceCount = 0;
           Workspace.count({username: req.session.username}, function(err, count){
             workspaceCount = count;
-            res.render('profile', { title: title, signed_in: req.session.signed_in, email: req.session.email, name: req.session.name, username: req.session.username, dateCreated: req.session.dateCreated, workspaceCount: workspaceCount});
+            res.render('profile', {workspaces1: workspaces, title: title, signed_in: req.session.signed_in, email: req.session.email, name: req.session.name, username: req.session.username, dateCreated: req.session.dateCreated, workspaceCount: workspaceCount});
           });
+        });  
           
         }
       }
