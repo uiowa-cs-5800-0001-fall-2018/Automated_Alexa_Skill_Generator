@@ -1,4 +1,5 @@
 const Alexa = require('ask-sdk-core');
+const rp = require('request-promise')
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
@@ -56,14 +57,57 @@ const SessionEndedRequestHandler = {
   },
 };
 
-// Todo: Add more custom intents here!
+const ErrorHandler = {
+  canHandle() {
+    return true;
+  },
+  handle(handlerInput, error) {
+    console.log('An error occured :(');
+
+    return handlerInput.responseBuilder
+      .speak('Sorry, I cant understand the command. Please say again.')
+      .reprompt('Sorry, I cant understand the command. Please say again.')
+      .getResponse();
+  },
+};
+
+function getRoute() {
+  return rp('http://api.ebongo.org/prediction?stopid=0001')
+}
+
+const getBusRouteIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'getBusRouteIntent';
+  },
+  async handle(handlerInput) {
+
+    let speechText = 'I dont have any bus information';
+
+    await getRoute().then(function(value) {
+      let predictionsArray = JSON.parse(value).predictions
+      let firstBus = predictionsArray[0].title
+      let firstTime = predictionsArray[0].minutes
+
+      speechText = 'A ' + firstBus + ' will arrive in ' + firstTime + ' minutes'
+
+    }, function(err) {
+      speechText = "There was a problem"
+    })
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard('Hello World', speechText)
+      .getResponse();
+  },
+};
 
 const skillBuilder = Alexa.SkillBuilders.custom();
 
 exports.handler = skillBuilder
   .addRequestHandlers(
     LaunchRequestHandler,
-    HelloWorldIntentHandler,
+    getBusRouteIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler

@@ -24,8 +24,13 @@ router.post('/generateSkill', function(req, res){
   let lambdaFilePath = 'alexa-skill/index.js'
   let skillFilePath = 'alexa-skill/skill.json'
   let intents = []
+  let jsonRaw = req.body['content']
+  // let json = JSON.parse(jsonUnformatted)
+  let json = JSON.parse(JSON.stringify(jsonRaw));
+  intents = [{"base_url": "http://api.ebongo.org/stop?", "parameter": {"key": "stopID", "value": "7271"}}]
   let lambdaCode = templater.generateLambdaFunction(intents)
   templater.writeToFile(lambdaFilePath, lambdaCode)
+  templater.writeToFile(skillFilePath, json)
 
   res.zip([
     {path: 'alexa-skill/index.js', name: 'index.js'},

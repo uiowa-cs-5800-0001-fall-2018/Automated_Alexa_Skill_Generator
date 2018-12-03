@@ -1,4 +1,196 @@
 extends layout
 
 block content
-  p HELP PAGE HERE
+  .container-fluid.w-100.text-center(style='padding-top:20px;padding-bottom:0px')
+    //-h1(style='margin-bottom: 20px')
+    .card-deck
+      .card.bg-warning
+        .card-body.text-left
+          h2.mb-0
+            i.fas.fa-exclamation.mb-0(style='margin-right: 8px')
+            | Requirements:
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          h1(style='margin-bottom: 0px')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-exclamation-circle.mb-0(style='margin-right: 8px')
+                  | Have an Amazon Developer account created.
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:20px; color: white')
+          h1(style='margin-bottom: 0px')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-exclamation-circle.mb-0(style='margin-right: 8px')
+                  | Have an AWS account created.
+  .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:20px')
+    h1(style='margin-bottom: 20px')
+    .card-deck
+      .card.bg-success
+        .card-body.text-left
+          h2.mb-0
+            i.fas.fa-question.mb-0(style='margin-right: 8px')
+            | After Generating Skill
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | Go to <a href='https://developer.amazon.com/alexa' target="_blank">developer.amazon.com/alexa</a> and log in.
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | Go to Your Alexa Skills in the top left corner and select Skills.
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | Click Create Skill
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | Name your Alexa Skill, this is what your users will see when they download the skill.
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | Select the Custom model
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | In the Interaction Model tab, select JSON Editor
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | Paste the contents of the JSON file generated from our site.
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | Go to <a href='https://aws.amazon.com' target="_blank">aws.amazon.com</a> and log in
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | Navigate to the AWS Lambda Management Console
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | Select Create a function
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | Choose Author From Scratch
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | Enter the Name for the function
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | Select the Role for the function. This defines the AWS resources the function can access.
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | If you need to create a Role for the function, select Create Custom Role from Template.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Provide a name for the role.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Make sure to include Simple Microservice Permissions for the role.
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | Select the language you want to use for the Runtime, we are using Node.js 8.10.
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | Click Create Function.
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | In the Function code section select Upload a .zip file.
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | Upload the index.js file generated from our website.
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | On the top of the page, there is the ARN string copy it to your clipboard.
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | Navigate back to your Alexa Skill page on developer.amazon.com/alexa
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | Select the Endpoint tab to configure the endpoint for the skill.
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:10px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | Choose AWS Lambda ARN and plaste the ARN of the funciton you created in the field.
+        .container-fluid.w-100.text-center(style='padding-top:0px;padding-bottom:20px; color: white')
+          .card-deck
+            .card(style="background-color:black;")
+              .card-body.text-left
+                p.mb-0
+                  i.fas.fa-question-circle.mb-0(style='margin-right: 8px')
+                  | Click Save Endpoints.

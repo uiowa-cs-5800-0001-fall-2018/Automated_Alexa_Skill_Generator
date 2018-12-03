@@ -1,1 +1,1 @@
-{"interactionModel": { "languageModel": {"invocationName": "AlexaSkill", "intents": [{"name": "AlexaIntent", "samples": ['SampleUtterance'], "lambda_function": {"base_url": "www.sample.com", "parameter": {"key": "", "value": ""}}}]}}}
+{"interactionModel": { "languageModel": {"invocationName": "AlexaSkill", "intents": [{"name": "AlexaIntent", "samples": ['SampleUtterance'], "lambda_function": {"base_url": "http://api.ebongo.org/stop?", "parameter": {"key": "stopID", "value": ""}}}]}}}
