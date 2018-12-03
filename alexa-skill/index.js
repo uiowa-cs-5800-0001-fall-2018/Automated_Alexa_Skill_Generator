@@ -72,17 +72,17 @@ const ErrorHandler = {
 };
 
 function getRoute() {
-  return rp('http://api.ebongo.org/stop?stopid=0001')
+  return rp('http://api.ebongo.org/prediction?stopid=0001')
 }
 
-const GetBusIntentHandler = {
+const GetMyBusIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'GetBusIntent';
+      && handlerInput.requestEnvelope.request.intent.name === 'GetMyBusIntent';
   },
   async handle(handlerInput) {
 
-    let speechText = 'I dont have any bus information';
+    let speechText = 'No buses are ariving any time soon.';
 
     await getRoute().then(function(value) {
       let predictionsArray = JSON.parse(value).predictions
@@ -110,7 +110,7 @@ exports.handler = skillBuilder
     HelpIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler,
-    GetBusIntentHandler
+    GetMyBusIntentHandler
 )
   .addErrorHandlers(ErrorHandler)
   .lambda();

@@ -1,12 +1,12 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "bongo",
+            "invocationName": "Bongo",
             "intents": [
                 {
-                    "name": "GetBusIntent",
+                    "name": "GetMyBusIntent",
                     "samples": [
-                        "when is bus coming"
+                        "Where is my bus at"
                     ]
                 },
                 {
