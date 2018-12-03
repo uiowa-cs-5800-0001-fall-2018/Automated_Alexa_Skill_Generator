@@ -12,5 +12,5 @@ You can also run the server using the nodemon package, which will
 automatically restart the server anytime a file is saved by using
 the command: ```nodemon start```
 
-## Appliction URL
+## Application URL
 Our application is hosted through Heroku at the URL: https://auto-alexa-skill-generator.herokuapp.com/ 
