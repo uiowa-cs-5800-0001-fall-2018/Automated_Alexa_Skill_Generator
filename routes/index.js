@@ -218,15 +218,29 @@ router.post('/saveworkspace', function (req, res, next){
           email: req.session.email,
           workspace: text
         }
-        console.log('Right Here');
-        Workspace.create(workspaceData, function (error, savedWorkspace) {
-          if (error) {
-            return next(error);
-          } 
-          else {
+        Workspace.count({name:workspaceName, username: req.session.username}, function(err, count){
+          if(count > 0){
+            Workspace.update({name: workspaceName, username: req.session.username}, workspaceData,function(error, raw){
+              if(error){
+                return next(error);
+              }
+              else{
+                res.redirect('back');
+              }
+            });
+          }
+          else{
+            Workspace.create(workspaceData, function (error, savedWorkspace) {
+              if (error) {
+                return next(error);
+              } 
+              else {
+                res.redirect('back');
+              }
+            });
           }
         });
       }
-  res.redirect('/design');
+  //res.redirect('/design');
 });
 module.exports = router;
